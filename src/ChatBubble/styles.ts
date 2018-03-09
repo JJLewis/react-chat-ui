@@ -1,7 +1,7 @@
 export default {
   chatbubbleWrapper: {
     overflow: 'auto',
-    display:'inline-block'
+    display:'inlin'
   },
   chatbubble: {
     backgroundColor: '#0084FF',

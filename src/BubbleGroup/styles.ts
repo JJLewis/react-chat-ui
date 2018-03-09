@@ -10,6 +10,7 @@ export default {
     fontSize: 14,
     fontWeight: '400',
     color: '#999',
-    display:'inline-block'
+    display:'inline-block',
+    float:'left'
   },
 };
