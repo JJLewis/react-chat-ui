@@ -336,7 +336,8 @@ exports.default = {
         margin: 0,
         fontSize: 14,
         fontWeight: '400',
-        color: '#999'
+        color: '#999',
+        display: 'inline-block'
     }
 };
 
@@ -397,7 +398,8 @@ exports.default = ChatBubble;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     chatbubbleWrapper: {
-        overflow: 'auto'
+        overflow: 'auto',
+        display: 'inline-block'
     },
     chatbubble: {
         backgroundColor: '#0084FF',
