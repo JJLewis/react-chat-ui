@@ -31,7 +31,7 @@ class ChatFeed extends React.Component {
             if (!messages[index + 1] || messages[index + 1].id !== message.id) {
                 const messageGroup = group;
                 group = [];
-                return (React.createElement(BubbleGroup_1.default, { key: index, messages: messageGroup, id: message.id, showSenderName: showSenderName, chatBubble: ChatBubble }));
+                return (React.createElement(BubbleGroup_1.default, { key: index, messages: messageGroup, id: message.id, showSenderName: showSenderName, chatBubble: ChatBubble, avatar: message.avatar, timestamp: message.timestamp }));
             }
             return null;
         });

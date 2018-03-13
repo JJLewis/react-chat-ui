@@ -5,6 +5,8 @@ class Message {
         this.id = messageData.id;
         this.message = messageData.message;
         this.senderName = messageData.senderName || undefined;
+        this.avatar = messageData.avatar;
+        this.timestamp = messageData.timestamp;
     }
 }
 exports.default = Message;

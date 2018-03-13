@@ -74,6 +74,8 @@ export default class ChatFeed extends React.Component {
             id={message.id}
             showSenderName={showSenderName}
             chatBubble={ChatBubble}
+            avatar={message.avatar}
+            timestamp={message.timestamp}
           />
         );
       }
