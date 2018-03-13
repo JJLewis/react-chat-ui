@@ -6,6 +6,7 @@ exports.default = {
         flexDirection: 'column',
         flex: 1,
         overflow: 'hidden',
+        height: '100%'
     },
     chatHistory: { overflow: 'auto' },
     chatbubbleWrapper: {

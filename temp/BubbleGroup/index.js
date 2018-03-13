@@ -8,7 +8,7 @@ class BubbleGroup extends React.Component {
         super(props);
     }
     renderGroup(messages, id) {
-        const { bubblesCentered, bubbleStyles, showSenderName, chatBubble, senderName, } = this.props;
+        const { bubblesCentered, bubbleStyles, showSenderName, chatBubble, senderName, avatar, timestamp } = this.props;
         const ChatBubble = chatBubble || ChatBubble_1.default;
         const sampleMessage = messages[0];
         const messageNodes = messages.map((message, i) => {
@@ -17,8 +17,15 @@ class BubbleGroup extends React.Component {
         return (React.createElement("div", { style: styles_1.default.chatbubbleWrapper },
             showSenderName &&
                 ((senderName || sampleMessage.senderName) !== '' &&
-                    (sampleMessage.id !== 0 && (React.createElement("h5", { style: styles_1.default.bubbleGroupHeader }, senderName || sampleMessage.senderName)))),
-            messageNodes));
+                    (sampleMessage.id !== 0 && (React.createElement("h5", { style: styles_1.default.bubbleGroupHeader }, avatar)))),
+            React.createElement("div", null,
+                React.createElement("h4", null,
+                    senderName,
+                    " ",
+                    React.createElement("small", { style: { fontSize: '9px', marginLeft: '5px' } },
+                        timestamp,
+                        " ")),
+                messageNodes)));
     }
     render() {
         const { messages, id } = this.props;

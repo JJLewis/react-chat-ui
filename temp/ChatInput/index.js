@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const react_1 = require("react");
+const React = require("react");
 const styles = {
     chatInput: {
         flex: 1,
@@ -18,8 +18,8 @@ const styles = {
 };
 const ChatInput = (props) => {
     const { inputStyles, inputPlaceholder } = props;
-    return (react_1.default.createElement("div", { className: "chat-input", style: styles.chatInput },
-        react_1.default.createElement("input", { type: "text", style: inputStyles || styles.inputStyle, placeholder: inputPlaceholder })));
+    return (React.createElement("div", { className: "chat-input", style: styles.chatInput },
+        React.createElement("input", { type: "text", style: inputStyles || styles.inputStyle, placeholder: inputPlaceholder })));
 };
 exports.default = ChatInput;
 //# sourceMappingURL=index.js.map

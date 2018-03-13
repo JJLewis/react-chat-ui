@@ -22,6 +22,8 @@ export default class BubbleGroup extends React.Component {
       showSenderName,
       chatBubble,
       senderName,
+      avatar,
+      timestamp
     } = this.props;
     const ChatBubble = chatBubble || DefaultChatBubble;
     const sampleMessage = messages[0];
@@ -43,10 +45,13 @@ export default class BubbleGroup extends React.Component {
           ((senderName || sampleMessage.senderName) !== '' &&
             (sampleMessage.id !== 0 && (
               <h5 style={styles.bubbleGroupHeader}>
-                {senderName || sampleMessage.senderName}
+                {avatar}
               </h5>
             )))}
-        {messageNodes}
+          <div>
+            <h4>{senderName} <small style={{fontSize:'9px',marginLeft:'5px'}}>{timestamp} </small></h4> 
+            {messageNodes}
+          </div>
       </div>
     );
   }
