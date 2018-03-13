@@ -49,7 +49,7 @@ export default class BubbleGroup extends React.Component {
               </h5>
             )))}
           <div>
-            <h4>{senderName||''} <small style={{fontSize:'9px',marginLeft:'5px'}}>{timestamp ? timestamp.toString():''} </small></h4> 
+            <h4>{sampleMessage.senderName || ''} <small style={{fontSize:'9px',marginLeft:'5px'}}>{timestamp ? timestamp.toString():''} </small></h4> 
             {messageNodes}
           </div>
       </div>
