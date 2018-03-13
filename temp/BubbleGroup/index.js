@@ -20,7 +20,7 @@ class BubbleGroup extends React.Component {
                     (sampleMessage.id !== 0 && (React.createElement("h5", { style: styles_1.default.bubbleGroupHeader }, avatar || '')))),
             React.createElement("div", null,
                 React.createElement("h4", null,
-                    sampleMessage.senderName || '',
+                    showSenderName ? sampleMessage.senderName : senderName,
                     " ",
                     React.createElement("small", { style: { fontSize: '9px', marginLeft: '5px' } },
                         timestamp ? timestamp.toString() : '',
