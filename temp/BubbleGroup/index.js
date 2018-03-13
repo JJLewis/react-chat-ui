@@ -11,13 +11,14 @@ class BubbleGroup extends React.Component {
         const { bubblesCentered, bubbleStyles, showSenderName, chatBubble, senderName, avatar, timestamp } = this.props;
         const ChatBubble = chatBubble || ChatBubble_1.default;
         const sampleMessage = messages[0];
+        const Avatar = avatar;
         const messageNodes = messages.map((message, i) => {
             return (React.createElement(ChatBubble, { key: i, message: message, bubblesCentered: bubblesCentered, bubbleStyles: bubbleStyles }));
         });
         return (React.createElement("div", { style: styles_1.default.chatbubbleWrapper },
             showSenderName &&
                 ((senderName || sampleMessage.senderName) !== '' &&
-                    (sampleMessage.id !== 0 && (React.createElement("h5", { style: styles_1.default.bubbleGroupHeader }, avatar ? React.createElement("avatar", null) : '')))),
+                    (sampleMessage.id !== 0 && (React.createElement("h5", { style: styles_1.default.bubbleGroupHeader }, avatar ? React.createElement(Avatar, null) : '')))),
             React.createElement("div", null,
                 React.createElement("h4", null,
                     senderName || '',
