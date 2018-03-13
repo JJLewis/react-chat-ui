@@ -17,13 +17,13 @@ class BubbleGroup extends React.Component {
         return (React.createElement("div", { style: styles_1.default.chatbubbleWrapper },
             showSenderName &&
                 ((senderName || sampleMessage.senderName) !== '' &&
-                    (sampleMessage.id !== 0 && (React.createElement("h5", { style: styles_1.default.bubbleGroupHeader }, avatar || '')))),
+                    (sampleMessage.id !== 0 && (React.createElement("h5", { style: styles_1.default.bubbleGroupHeader }, avatar ? React.createElement("avatar", null) : '')))),
             React.createElement("div", null,
                 React.createElement("h4", null,
                     senderName || '',
                     " ",
                     React.createElement("small", { style: { fontSize: '9px', marginLeft: '5px' } },
-                        timestamp || '',
+                        timestamp ? timestamp.toString() : '',
                         " ")),
                 messageNodes)));
     }
