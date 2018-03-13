@@ -27,7 +27,7 @@ export default class BubbleGroup extends React.Component {
     } = this.props;
     const ChatBubble = chatBubble || DefaultChatBubble;
     const sampleMessage = messages[0];
-    const Avatar=avatar;
+   
     const messageNodes = messages.map((message, i) => {
       return (
         <ChatBubble
@@ -45,7 +45,7 @@ export default class BubbleGroup extends React.Component {
           ((senderName || sampleMessage.senderName) !== '' &&
             (sampleMessage.id !== 0 && (
               <h5 style={styles.bubbleGroupHeader}>
-                {avatar ? <Avatar/> : ''}
+                {avatar||''}
               </h5>
             )))}
           <div>
