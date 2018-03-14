@@ -24,7 +24,7 @@ class BubbleGroup extends React.Component {
                     showSenderName ? sampleMessage.senderName : senderName,
                     " ",
                     React.createElement("small", { style: { fontSize: '9px', marginLeft: '5px' } },
-                        timestamp ? moment(timestamp).fromNow(true) : '',
+                        timestamp ? moment(timestamp).fromNow() : '',
                         " ")),
                 messageNodes)));
     }

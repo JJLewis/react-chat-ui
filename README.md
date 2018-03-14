@@ -4,19 +4,20 @@
 
 A library of React components for building chat UI's.
 
-[![NPM](https://nodei.co/npm/react-chat-ui.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/react-chat-ui/)
+
 
 ## Features
 
-* Auto scroll to bottom
-* SUPER easy to use
+* Custom Avatar Support
+* User name
+* Timestamp / time messages sent
 * Multiple user grouping (try it out in the demo)
 
-Keep in mind that this project is still in the early stages of development. If you encounter a bug or have a feature request, please create an issue and/or tweet at me [here](http://twitter.com/brandonmowat).
+Keep in mind that this project is still in the early stages of development. If you encounter a bug or have a feature request plz make a comment
 
 ## Installation
 
-`npm install react-chat-ui --save`
+`npm install https://github.com/DasithKuruppu/react-chat-ui.git --save`
 
 ## Basic Usage
 
@@ -37,6 +38,8 @@ render() {
       hasInputField={false} // Boolean: use our input, or use your own
       showSenderName // show the name of the user who sent the message
       bubblesCentered={false} //Boolean should the bubbles be centered in the feed?
+      style={{height:400px}}// styles for feed
+
       // JSON: Custom bubble styles
       bubbleStyles={
         {
@@ -68,6 +71,9 @@ this.state = {
     new Message({
       id: 1,
       message: "I'm the recipient! (The person you're talking to)",
+      senderName: "George",
+      avatar:<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRArL5ZYgvYomgLZ6QKxjLO6iK-w6UqdRakfN56wFzWwE7ewq0O"/>,
+      timestamp: new Date()
     }), // Gray bubble
     new Message({ id: 0, message: "I'm you -- the blue bubble!" }), // Blue bubble
   ],
@@ -83,16 +89,11 @@ this.state = {
 * [ChatBubble](./src/ChatBubble)
 * [BubbleGroup](./src/BubbleGroup)
 
-## Contributing!¡1 🔧
+## Credits!¡1 🔧
 
-Contributions are always welcomed and encouraged. If you don't want to write a feature request yourself, let ya boi know (either on [Twitter](http://twitter.com/brandonmowat) or by creating a Pull Request) and I'll get that shit coded right up.
+Originally forked from https://github.com/brandonmowat/react-chat-ui , Contributions are welcome 
 
-## Support
 
-If you'd like to support my development of `react-chat-ui`, you can donate via Litecoin or Etherium. But I also love when I get a shout-out on Twitter❤️
-
-* LTC: `LYExBx4bwSpAju6YpMXBLBCYVDvWV6n8fz`
-* ETH: `0xf9bf1a68732b1314f28050addd3ed13f2a187d9d`
 
 ## TODO
 
@@ -104,4 +105,5 @@ If you'd like to support my development of `react-chat-ui`, you can donate via L
 
 ```sh
 npm run dev
+
 ```
