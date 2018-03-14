@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const React = require("react");
 const ChatBubble_1 = require("../ChatBubble");
 const styles_1 = require("./styles");
+const moment = require("moment");
 class BubbleGroup extends React.Component {
     constructor(props) {
         super(props);
@@ -23,7 +24,7 @@ class BubbleGroup extends React.Component {
                     showSenderName ? sampleMessage.senderName : senderName,
                     " ",
                     React.createElement("small", { style: { fontSize: '9px', marginLeft: '5px' } },
-                        timestamp ? timestamp.toString() : '',
+                        timestamp ? moment(timestamp).fromNow(true) : '',
                         " ")),
                 messageNodes)));
     }

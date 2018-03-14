@@ -3,7 +3,7 @@ import BubbleGroupInterface from './interface';
 import DefaultChatBubble from '../ChatBubble';
 import Message from '../Message';
 import styles from './styles';
-
+import * as moment from 'moment';
 export default class BubbleGroup extends React.Component {
   props;
 
@@ -49,7 +49,7 @@ export default class BubbleGroup extends React.Component {
               </h5>
             )))}
           <div>
-            <h4>{showSenderName ? sampleMessage.senderName : senderName} <small style={{fontSize:'9px',marginLeft:'5px'}}>{timestamp ? timestamp.toString():''} </small></h4> 
+            <h4>{showSenderName ? sampleMessage.senderName : senderName} <small style={{fontSize:'9px',marginLeft:'5px'}}>{timestamp ? moment(timestamp).fromNow(true):''} </small></h4> 
             {messageNodes}
           </div>
       </div>

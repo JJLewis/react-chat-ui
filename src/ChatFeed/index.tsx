@@ -20,6 +20,7 @@ interface ChatFeedInterface {
     messages: any;
     showSenderName?: boolean;
     chatBubble?: React.Component;
+    style:object;
   };
 }
 
@@ -104,10 +105,10 @@ export default class ChatFeed extends React.Component {
    */
   render() {
     const inputField = this.props.hasInputField && <ChatInput />;
-    const { maxHeight } = this.props;
+    const { maxHeight, style } = this.props;
 
     return (
-      <div id="chat-panel" style={styles.chatPanel}>
+      <div id="chat-panel" style={{...styles.chatPanel, ...style}}>
         <div
           ref={c => {
             this.chat = c;
