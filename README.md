@@ -19,6 +19,10 @@ Keep in mind that this project is still in the early stages of development. If y
 
 `npm install monkas-chat --save`
 
+## Demo
+
+[Chat demo click here](https://dasithkuruppu.github.io/react-chat-ui/demo/)
+
 ## Basic Usage
 
 ```javascript
