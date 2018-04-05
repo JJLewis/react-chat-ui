@@ -107,7 +107,7 @@ class Chat extends React.Component {
           </a>
         </p>
         <div className="install">
-          <code>npm i -S react-chat-ui</code>
+          <code>npm i -s monkas-chat</code>
         </div>
         <div className="chatfeed-wrapper">
           <ChatFeed
