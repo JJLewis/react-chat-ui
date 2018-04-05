@@ -69,8 +69,20 @@ var Chat = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).call(this));
 
     _this.state = {
-      messages: [new _lib.Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }), new _lib.Message({
-        id: 2,
+      messages: [new _lib.Message({
+        id: 1,
+        message: "I'm the recipient! (The person you're talking to)",
+        senderName: "George",
+        avatar: _react2.default.createElement('img', { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRArL5ZYgvYomgLZ6QKxjLO6iK-w6UqdRakfN56wFzWwE7ewq0O', style: { width: "50px" } }),
+        timestamp: new Date()
+      }), new _lib.Message({
+        id: 1,
+        message: "theres something else too..",
+        senderName: "George",
+        avatar: _react2.default.createElement('img', { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRArL5ZYgvYomgLZ6QKxjLO6iK-w6UqdRakfN56wFzWwE7ewq0O', style: { width: "50px" } }),
+        timestamp: new Date()
+      }), new _lib.Message({
+        id: 0,
         message: 'Hey! Evan here. react-chat-ui is pretty dooope.',
         senderName: 'Evan'
       })],

@@ -11,6 +11,8 @@ export default {
     fontWeight: '400',
     color: '#999',
     display:'inline-block',
-    float:'left'
+    float:'left',
+    width:'auto',
+    paddingRight:'5px'
   },
 };

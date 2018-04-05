@@ -44,12 +44,12 @@ export default class BubbleGroup extends React.Component {
         {showSenderName &&
           ((senderName || sampleMessage.senderName) !== '' &&
             (sampleMessage.id !== 0 && (
-              <h5 style={styles.bubbleGroupHeader}>
+              <div style={styles.bubbleGroupHeader}>
                 {avatar||''}
-              </h5>
+              </div>
             )))}
-          <div>
-            <h4>{showSenderName ? sampleMessage.senderName : senderName} <small style={{fontSize:'9px',marginLeft:'5px'}}>{timestamp ? moment(timestamp).fromNow():''} </small></h4> 
+          <div style={{width:"80%",display:'inline-block',float:(sampleMessage.id==0 ? 'right':'left')}}>
+            <div><h5 style={{display:"inline",verticalAlign:"text-top"}}>{(showSenderName && sampleMessage.id!==0) ? sampleMessage.senderName : senderName} <small style={{fontSize:'9px',marginLeft:'5px'}}>{timestamp ? moment(timestamp).fromNow():''} </small></h5></div> 
             {messageNodes}
           </div>
       </div>

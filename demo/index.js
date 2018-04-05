@@ -43,9 +43,22 @@ class Chat extends React.Component {
     super();
     this.state = {
       messages: [
-        new Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }),
         new Message({
-          id: 2,
+          id: 1,
+          message: "I'm the recipient! (The person you're talking to)",
+          senderName: "George",
+          avatar:<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRArL5ZYgvYomgLZ6QKxjLO6iK-w6UqdRakfN56wFzWwE7ewq0O" style={{width:"50px"}}/>,
+          timestamp: new Date()
+        }),
+        new Message({
+          id: 1,
+          message: "theres something else too..",
+          senderName: "George",
+          avatar:<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRArL5ZYgvYomgLZ6QKxjLO6iK-w6UqdRakfN56wFzWwE7ewq0O" style={{width:"50px"}}/>,
+          timestamp: new Date()
+        }),
+        new Message({
+          id: 0,
           message: 'Hey! Evan here. react-chat-ui is pretty dooope.',
           senderName: 'Evan',
         }),

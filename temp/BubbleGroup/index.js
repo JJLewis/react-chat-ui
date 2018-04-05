@@ -18,14 +18,15 @@ class BubbleGroup extends React.Component {
         return (React.createElement("div", { style: styles_1.default.chatbubbleWrapper },
             showSenderName &&
                 ((senderName || sampleMessage.senderName) !== '' &&
-                    (sampleMessage.id !== 0 && (React.createElement("h5", { style: styles_1.default.bubbleGroupHeader }, avatar || '')))),
-            React.createElement("div", null,
-                React.createElement("h4", null,
-                    showSenderName ? sampleMessage.senderName : senderName,
-                    " ",
-                    React.createElement("small", { style: { fontSize: '9px', marginLeft: '5px' } },
-                        timestamp ? moment(timestamp).fromNow() : '',
-                        " ")),
+                    (sampleMessage.id !== 0 && (React.createElement("div", { style: styles_1.default.bubbleGroupHeader }, avatar || '')))),
+            React.createElement("div", { style: { width: "80%", display: 'inline-block', float: (sampleMessage.id == 0 ? 'right' : 'left') } },
+                React.createElement("div", null,
+                    React.createElement("h5", { style: { display: "inline", verticalAlign: "text-top" } },
+                        (showSenderName && sampleMessage.id !== 0) ? sampleMessage.senderName : senderName,
+                        " ",
+                        React.createElement("small", { style: { fontSize: '9px', marginLeft: '5px' } },
+                            timestamp ? moment(timestamp).fromNow() : '',
+                            " "))),
                 messageNodes)));
     }
     render() {
