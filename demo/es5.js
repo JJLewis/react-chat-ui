@@ -152,7 +152,7 @@ var Chat = function (_React$Component) {
           _react2.default.createElement(
             'code',
             null,
-            'npm i -S react-chat-ui'
+            'npm i -s monkas-chat'
           )
         ),
         _react2.default.createElement(
