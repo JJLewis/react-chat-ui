@@ -17,12 +17,12 @@ Keep in mind that this project is still in the early stages of development. If y
 
 ## Installation
 
-`npm install https://github.com/DasithKuruppu/react-chat-ui.git --save`
+`npm install monkas-chat --save`
 
 ## Basic Usage
 
 ```javascript
-import { ChatFeed, Message } from 'react-chat-ui'
+import { ChatFeed, Message } from 'monkas-chat'
 
 // Your code stuff...
 
