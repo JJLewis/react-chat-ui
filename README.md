@@ -1,8 +1,7 @@
-![react-chat-ui logo](https://i.imgur.com/YhPrFWw.png)
 
-# 🙊 react-chat-ui
+# 🙊 MonkasChat
 
-A library of React components for building chat UI's.
+A library of React components for building chat UI's
 
 
 
@@ -12,6 +11,11 @@ A library of React components for building chat UI's.
 * User name
 * Timestamp / time messages sent
 * Multiple user grouping (try it out in the demo)
+
+## Upcoming features 
+
+* Message seen tag
+* Message Type ( Image / File / Text )
 
 Keep in mind that this project is still in the early stages of development. If you encounter a bug or have a feature request plz make a comment
 
