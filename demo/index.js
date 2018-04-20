@@ -132,7 +132,7 @@ class Chat extends React.Component {
         </div>
         <div className="chatfeed-wrapper">
           <ChatFeed
-            chatBubble={this.state.useCustomBubble && customBubble}
+            //chatBubble={this.state.useCustomBubble && customBubble}
             maxHeight="auto"
             messages={this.state.messages} // Boolean: list of message objects
             showSenderName
