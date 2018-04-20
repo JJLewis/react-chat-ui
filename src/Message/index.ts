@@ -10,6 +10,10 @@ interface MessageData {
   senderName?: string;
   avatar?: any;
   timestamp?: Date;
+  type?: string;
+  isRead?: boolean;
+  metaData?: any;
+
 }
 
 export default class Message {
@@ -21,11 +25,17 @@ export default class Message {
   senderName?: string;
   avatar?: any;
   timestamp?: Date;
+  type?: string;
+  isRead?: boolean;
+  metaData?: any;
   constructor(messageData: MessageData) {
     this.id = messageData.id; // id of the sender (0 is reserved for "blue bubble")
     this.message = messageData.message;
     this.senderName = messageData.senderName || undefined;
     this.avatar=messageData.avatar;
     this.timestamp=messageData.timestamp;
+    this.type=messageData.type || 'text';
+    this.isRead=messageData.isRead || false;
+    this.metaData=messageData.metaData || {};
   }
 }

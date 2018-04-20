@@ -13,8 +13,8 @@ export default {
     maxWidth: 425,
     paddingTop: 8,
     paddingBottom: 8,
-    paddingLeft: 14,
-    paddingRight: 14,
+    paddingLeft: 8,
+    paddingRight: 8,
     width: '-webkit-fit-content',
   },
   chatbubbleOrientationNormal: {
@@ -31,5 +31,6 @@ export default {
     fontSize: 16,
     fontWeight: '300',
     margin: 0,
+    display:'inline-block'
   },
 };

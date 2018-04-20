@@ -7,6 +7,9 @@ class Message {
         this.senderName = messageData.senderName || undefined;
         this.avatar = messageData.avatar;
         this.timestamp = messageData.timestamp;
+        this.type = messageData.type || 'text';
+        this.isRead = messageData.isRead || false;
+        this.metaData = messageData.metaData || {};
     }
 }
 exports.default = Message;

@@ -30,6 +30,12 @@ const users = {
   2: 'Evan',
 };
 
+const avatars={
+  'You': null,
+  'Mark':<img src="http://icons.iconarchive.com/icons/hopstarter/halloween-avatar/256/Dave-icon.png" style={{width:"50px"}}/>,
+  'Evan':<img src="http://icons.iconarchive.com/icons/hopstarter/halloween-avatar/128/Bat-icon.png" style={{width:"50px"}}/>
+}
+
 const customBubble = props => (
   <div>
     <p>{`${props.message.senderName} ${props.message.id ? 'says' : 'said'}: ${
@@ -56,6 +62,19 @@ class Chat extends React.Component {
           senderName: "George",
           avatar:<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRArL5ZYgvYomgLZ6QKxjLO6iK-w6UqdRakfN56wFzWwE7ewq0O" style={{width:"50px"}}/>,
           timestamp: new Date()
+        }),
+        new Message({
+          id: 1,
+          message: "https://www.sample-videos.com/text/Sample-text-file-10kb.txt",
+          senderName: "George",
+          avatar:<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRArL5ZYgvYomgLZ6QKxjLO6iK-w6UqdRakfN56wFzWwE7ewq0O" style={{width:"50px"}}/>,
+          timestamp: new Date(),
+          type:'file',
+          metaData:{
+            name:'Random txt',
+            fileType:'png',
+            thumbnail:'https://png.icons8.com/cotton/2x/document.png'
+          }
         }),
         new Message({
           id: 0,
@@ -89,6 +108,8 @@ class Chat extends React.Component {
       id: recipient,
       message,
       senderName: users[recipient],
+      avatar:avatars[users[recipient]],
+      isRead: users[recipient]=='You' 
     });
     prevState.messages.push(newMessage);
     this.setState(this.state);
@@ -112,7 +133,7 @@ class Chat extends React.Component {
         <div className="chatfeed-wrapper">
           <ChatFeed
             chatBubble={this.state.useCustomBubble && customBubble}
-            maxHeight={250}
+            maxHeight="auto"
             messages={this.state.messages} // Boolean: list of message objects
             showSenderName
           />

@@ -48,6 +48,12 @@ var users = {
   2: 'Evan'
 };
 
+var avatars = {
+  'You': null,
+  'Mark': _react2.default.createElement('img', { src: 'http://icons.iconarchive.com/icons/hopstarter/halloween-avatar/256/Dave-icon.png', style: { width: "50px" } }),
+  'Evan': _react2.default.createElement('img', { src: 'http://icons.iconarchive.com/icons/hopstarter/halloween-avatar/128/Bat-icon.png', style: { width: "50px" } })
+};
+
 var customBubble = function customBubble(props) {
   return _react2.default.createElement(
     'div',
@@ -81,6 +87,18 @@ var Chat = function (_React$Component) {
         senderName: "George",
         avatar: _react2.default.createElement('img', { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRArL5ZYgvYomgLZ6QKxjLO6iK-w6UqdRakfN56wFzWwE7ewq0O', style: { width: "50px" } }),
         timestamp: new Date()
+      }), new _lib.Message({
+        id: 1,
+        message: "https://www.sample-videos.com/text/Sample-text-file-10kb.txt",
+        senderName: "George",
+        avatar: _react2.default.createElement('img', { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRArL5ZYgvYomgLZ6QKxjLO6iK-w6UqdRakfN56wFzWwE7ewq0O', style: { width: "50px" } }),
+        timestamp: new Date(),
+        type: 'file',
+        metaData: {
+          name: 'Random txt',
+          fileType: 'png',
+          thumbnail: 'https://png.icons8.com/cotton/2x/document.png'
+        }
       }), new _lib.Message({
         id: 0,
         message: 'Hey! Evan here. react-chat-ui is pretty dooope.',
@@ -116,7 +134,9 @@ var Chat = function (_React$Component) {
       var newMessage = new _lib.Message({
         id: recipient,
         message: message,
-        senderName: users[recipient]
+        senderName: users[recipient],
+        avatar: avatars[users[recipient]],
+        isRead: users[recipient] == 'You'
       });
       prevState.messages.push(newMessage);
       this.setState(this.state);
@@ -160,7 +180,7 @@ var Chat = function (_React$Component) {
           { className: 'chatfeed-wrapper' },
           _react2.default.createElement(_lib.ChatFeed, {
             chatBubble: this.state.useCustomBubble && customBubble,
-            maxHeight: 250,
+            maxHeight: 'auto',
             messages: this.state.messages // Boolean: list of message objects
             , showSenderName: true
           }),
