@@ -11,11 +11,12 @@ A library of React components for building chat UI's
 * User name
 * Timestamp / time messages sent
 * Multiple user grouping (try it out in the demo)
+* Message seen tick
+* Message types (Image / Files)
 
 ## Upcoming features 
 
-* Message seen tag
-* Message Type ( Image / File / Text )
+* Custom messages
 
 Keep in mind that this project is still in the early stages of development. If you encounter a bug or have a feature request plz make a comment
 
@@ -81,9 +82,10 @@ this.state = {
       message: "I'm the recipient! (The person you're talking to)",
       senderName: "George",
       avatar:<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRArL5ZYgvYomgLZ6QKxjLO6iK-w6UqdRakfN56wFzWwE7ewq0O"/>,
-      timestamp: new Date()
+      timestamp: new Date(),
+      type:'text'
     }), // Gray bubble
-    new Message({ id: 0, message: "I'm you -- the blue bubble!" }), // Blue bubble
+    new Message({ id: 0, message: "I'm you -- the blue bubble!",isRead:true }), // Blue bubble
   ],
   //...
 };
