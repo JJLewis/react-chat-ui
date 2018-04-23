@@ -17,9 +17,8 @@ class ChatBubble extends React.Component {
         bubbleStyles = bubbleStyles || defaultBubbleStyles;
         const { userBubble, chatbubble, text } = bubbleStyles;
         const readStatus = (this.props.message.id === 0 && this.props.message.isRead &&
-            (React.createElement("svg", { style: { float: 'right', display: 'inline-block', marginLeft: '6px', marginTop: '9px' }, version: "1.1", id: "Layer_1", xmlns: "http://www.w3.org/2000/svg", x: "0px", y: "0px", viewBox: "0 0 50 50", width: "15", height: "15" },
+            (React.createElement("svg", { style: { float: 'right', display: 'inline-block', position: 'absolute', bottom: 0, right: 0 }, version: "1.1", id: "Layer_1", xmlns: "http://www.w3.org/2000/svg", x: "0px", y: "0px", viewBox: "0 0 50 50", width: "15", height: "15" },
                 React.createElement("g", { id: "surface1_4_" },
-                    React.createElement("path", { fill: "#4CAF50", d: "M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z" }),
                     React.createElement("path", { fill: "#CCFF90", d: "M34.602,14.602L21,28.199l-5.602-5.598l-2.797,2.797L21,33.801l16.398-16.402L34.602,14.602z" })))));
         const chatBubbleStyles = this.props.message.id === 0
             ? Object.assign({}, styles_1.default.chatbubble, bubblesCentered ? {} : styles_1.default.chatbubbleOrientationNormal, chatbubble, userBubble) : Object.assign({}, styles_1.default.chatbubble, styles_1.default.recipientChatbubble, bubblesCentered
