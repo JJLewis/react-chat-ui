@@ -178,9 +178,9 @@ var Chat = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'chatfeed-wrapper' },
-          _react2.default.createElement(_lib.ChatFeed, {
-            chatBubble: this.state.useCustomBubble && customBubble,
-            maxHeight: 'auto',
+          _react2.default.createElement(_lib.ChatFeed
+          //chatBubble={this.state.useCustomBubble && customBubble}
+          , { maxHeight: 'auto',
             messages: this.state.messages // Boolean: list of message objects
             , showSenderName: true
           }),

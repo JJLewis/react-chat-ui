@@ -11,6 +11,8 @@ export default {
     marginBottom: 1,
     marginLeft: 'auto',
     maxWidth: 425,
+    position:'relative',
+    overflow:'hidden',
     paddingTop: 8,
     paddingBottom: 8,
     paddingLeft: 8,
