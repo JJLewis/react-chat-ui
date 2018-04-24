@@ -54,14 +54,17 @@ class Chat extends React.Component {
           message: "I'm the recipient! (The person you're talking to)",
           senderName: "George",
           avatar:<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRArL5ZYgvYomgLZ6QKxjLO6iK-w6UqdRakfN56wFzWwE7ewq0O" style={{width:"50px"}}/>,
-          timestamp: new Date()
+          timestamp: new Date(),
         }),
         new Message({
           id: 1,
-          message: "theres something else too..",
+          message: "This needs to be in red..",
           senderName: "George",
           avatar:<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRArL5ZYgvYomgLZ6QKxjLO6iK-w6UqdRakfN56wFzWwE7ewq0O" style={{width:"50px"}}/>,
-          timestamp: new Date()
+          timestamp: new Date(),
+          styles:{
+            bubbleStyles:{backgroundColor:'red'}
+          }
         }),
         new Message({
           id: 1,
@@ -109,7 +112,8 @@ class Chat extends React.Component {
       message,
       senderName: users[recipient],
       avatar:avatars[users[recipient]],
-      isRead: users[recipient]=='You' 
+      isRead: users[recipient]=='You',
+      timestamp: new Date()
     });
     prevState.messages.push(newMessage);
     this.setState(this.state);

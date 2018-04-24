@@ -83,7 +83,10 @@ this.state = {
       senderName: "George",
       avatar:<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRArL5ZYgvYomgLZ6QKxjLO6iK-w6UqdRakfN56wFzWwE7ewq0O"/>,
       timestamp: new Date(),
-      type:'text'
+      type:'text',
+      styles:{
+        bubbleStyles:{backgroundColor:'green'} // apply individual styles if needed to bubbles
+      }
     }), // Gray bubble
     new Message({ id: 0, message: "I'm you -- the blue bubble!",isRead:true }), // Blue bubble
   ],

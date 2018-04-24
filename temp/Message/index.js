@@ -10,6 +10,7 @@ class Message {
         this.type = messageData.type || 'text';
         this.isRead = messageData.isRead || false;
         this.metaData = messageData.metaData || {};
+        this.styles = messageData.styles || null;
     }
 }
 exports.default = Message;
