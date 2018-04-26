@@ -16,7 +16,7 @@ export default class ChatBubble extends React.Component {
   }
 
   public render() {
-    const { bubblesCentered } = this.props;
+    const { bubblesCentered,parser } = this.props;
     let { bubbleStyles } = this.props;
     bubbleStyles = bubbleStyles || defaultBubbleStyles;
     const { userBubble, chatbubble, text } = bubbleStyles;
@@ -61,7 +61,7 @@ export default class ChatBubble extends React.Component {
       {
         this.props.message.type=="text" &&
         (<div style={chatBubbleStyles}>
-          <p style={{ ...styles.p, ...text }}>{this.props.message.message}</p>
+          <p style={{ ...styles.p, ...text }}>{parser?parser(this.props.message.message):this.props.message.message}</p>
           {readStatus}
         </div>)
       }

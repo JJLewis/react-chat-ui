@@ -48,7 +48,7 @@ render() {
       showSenderName // show the name of the user who sent the message
       bubblesCentered={false} //Boolean should the bubbles be centered in the feed?
       style={{height:400px}}// styles for feed
-
+      parser={(text)=>{return text}} // Common parser for any  text messages rendered on a bubble (good for rendering empoticons if any) optional and you can igrnore this 
       // JSON: Custom bubble styles
       bubbleStyles={
         {

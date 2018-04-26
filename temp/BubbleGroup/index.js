@@ -9,11 +9,11 @@ class BubbleGroup extends React.Component {
         super(props);
     }
     renderGroup(messages, id) {
-        const { bubblesCentered, bubbleStyles, showSenderName, chatBubble, senderName, avatar, timestamp } = this.props;
+        const { bubblesCentered, bubbleStyles, showSenderName, chatBubble, senderName, avatar, timestamp, parser } = this.props;
         const ChatBubble = chatBubble || ChatBubble_1.default;
         const sampleMessage = messages[0];
         const messageNodes = messages.map((message, i) => {
-            return (React.createElement(ChatBubble, { key: i, message: message, bubblesCentered: bubblesCentered, bubbleStyles: bubbleStyles }));
+            return (React.createElement(ChatBubble, { key: i, message: message, bubblesCentered: bubblesCentered, bubbleStyles: bubbleStyles, parser: parser }));
         });
         return (React.createElement("div", { style: styles_1.default.chatbubbleWrapper },
             showSenderName &&

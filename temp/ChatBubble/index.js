@@ -12,7 +12,7 @@ class ChatBubble extends React.Component {
         super(props);
     }
     render() {
-        const { bubblesCentered } = this.props;
+        const { bubblesCentered, parser } = this.props;
         let { bubbleStyles } = this.props;
         bubbleStyles = bubbleStyles || defaultBubbleStyles;
         const { userBubble, chatbubble, text } = bubbleStyles;
@@ -25,7 +25,7 @@ class ChatBubble extends React.Component {
         return (React.createElement("div", { style: Object.assign({}, styles_1.default.chatbubbleWrapper) },
             this.props.message.type == "text" &&
                 (React.createElement("div", { style: chatBubbleStyles },
-                    React.createElement("p", { style: Object.assign({}, styles_1.default.p, text) }, this.props.message.message),
+                    React.createElement("p", { style: Object.assign({}, styles_1.default.p, text) }, parser ? parser(this.props.message.message) : this.props.message.message),
                     readStatus)),
             this.props.message.type === "image" &&
                 (React.createElement("div", { style: chatBubbleStyles },

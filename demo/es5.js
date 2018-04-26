@@ -187,6 +187,7 @@ var Chat = function (_React$Component) {
           , { maxHeight: 'auto',
             messages: this.state.messages // Boolean: list of message objects
             , showSenderName: true
+
           }),
           _react2.default.createElement(
             'form',

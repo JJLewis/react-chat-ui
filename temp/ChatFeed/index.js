@@ -23,7 +23,7 @@ class ChatFeed extends React.Component {
         this.chat.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
     }
     renderMessages(messages) {
-        const { isTyping, bubbleStyles, chatBubble, showSenderName } = this.props;
+        const { isTyping, bubbleStyles, chatBubble, showSenderName, parser } = this.props;
         const ChatBubble = chatBubble || ChatBubble_1.default;
         let group = [];
         const messageNodes = messages.map((message, index) => {
@@ -31,7 +31,7 @@ class ChatFeed extends React.Component {
             if (!messages[index + 1] || messages[index + 1].id !== message.id) {
                 const messageGroup = group;
                 group = [];
-                return (React.createElement(BubbleGroup_1.default, { key: index, messages: messageGroup, id: message.id, showSenderName: showSenderName, chatBubble: ChatBubble, avatar: message.avatar, timestamp: message.timestamp }));
+                return (React.createElement(BubbleGroup_1.default, { key: index, messages: messageGroup, id: message.id, showSenderName: showSenderName, chatBubble: ChatBubble, avatar: message.avatar, timestamp: message.timestamp, parser: parser }));
             }
             return null;
         });

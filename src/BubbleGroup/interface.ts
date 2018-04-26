@@ -4,4 +4,5 @@ export default interface BubbleGroupInterface {
   id: number;
   showSenderName: boolean;
   chatBubble: ChatBubble;
+  render?:any;
 };
