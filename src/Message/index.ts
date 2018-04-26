@@ -6,7 +6,7 @@ import * as React from 'react';
 
 interface MessageData {
   id: number;
-  message: string;
+  message: any;
   senderName?: string;
   avatar?: any;
   timestamp?: Date;
@@ -22,7 +22,7 @@ export default class Message {
    * Message object for organizing and storing current message data.
    */
   id: number;
-  message: string;
+  message: any;
   senderName?: string;
   avatar?: any;
   timestamp?: Date;
