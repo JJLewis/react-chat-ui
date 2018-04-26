@@ -140,7 +140,7 @@ class Chat extends React.Component {
             maxHeight="auto"
             messages={this.state.messages} // Boolean: list of message objects
             showSenderName
-           
+            parser={(text)=>text}
           />
 
           <form onSubmit={e => this.onMessageSubmit(e)}>

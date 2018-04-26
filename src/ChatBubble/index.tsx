@@ -70,7 +70,7 @@ export default class ChatBubble extends React.Component {
         this.props.message.type==="image" &&
         (<div style={chatBubbleStyles}>
           <p style={{ ...styles.p, ...text }}>
-            <img src={this.props.message.message}/>
+            <img src={this.props.message.message} style={{maxHeight:'100px'}}/>
           </p>
           {readStatus}
         </div>)

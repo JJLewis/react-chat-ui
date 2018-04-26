@@ -30,7 +30,7 @@ class ChatBubble extends React.Component {
             this.props.message.type === "image" &&
                 (React.createElement("div", { style: chatBubbleStyles },
                     React.createElement("p", { style: Object.assign({}, styles_1.default.p, text) },
-                        React.createElement("img", { src: this.props.message.message })),
+                        React.createElement("img", { src: this.props.message.message, style: { maxHeight: '100px' } })),
                     readStatus)),
             this.props.message.type === "file" &&
                 (React.createElement("div", { style: chatBubbleStyles },

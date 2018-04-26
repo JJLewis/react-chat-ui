@@ -186,8 +186,10 @@ var Chat = function (_React$Component) {
           //chatBubble={this.state.useCustomBubble && customBubble}
           , { maxHeight: 'auto',
             messages: this.state.messages // Boolean: list of message objects
-            , showSenderName: true
-
+            , showSenderName: true,
+            parser: function parser(text) {
+              return text;
+            }
           }),
           _react2.default.createElement(
             'form',
