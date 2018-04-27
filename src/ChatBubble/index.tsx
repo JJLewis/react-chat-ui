@@ -59,7 +59,10 @@ export default class ChatBubble extends React.Component {
           ...styles.chatbubbleWrapper,
         }}
       >
-      {
+
+        <Star starred={this.props.message.starred} isUser={this.props.message.id == 0}/>
+
+        {
         this.props.message.type=="text" &&
         (<div style={chatBubbleStyles}>
           <p style={{ ...styles.p, ...text }}>{parser?parser(this.props.message.message):this.props.message.message}</p>
@@ -92,7 +95,6 @@ export default class ChatBubble extends React.Component {
           {readStatus}
         </div>)
       }
-      <Star starred={this.props.message.starred} isUser={this.props.message.id == 0}/>
       </div>
     );
   }
