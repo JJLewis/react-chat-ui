@@ -363,6 +363,7 @@ var BubbleGroup = function (_React$Component) {
 }(React.Component);
 
 exports.default = BubbleGroup;
+
 },{"../ChatBubble":4,"./styles":3,"moment":25,"react":35}],3:[function(require,module,exports){
 "use strict";
 
@@ -385,6 +386,7 @@ exports.default = {
         paddingRight: '5px'
     }
 };
+
 },{}],4:[function(require,module,exports){
 "use strict";
 
@@ -438,6 +440,7 @@ var ChatBubble = function (_React$Component) {
 }(React.Component);
 
 exports.default = ChatBubble;
+
 },{"./styles":5,"react":35}],5:[function(require,module,exports){
 "use strict";
 
@@ -480,6 +483,7 @@ exports.default = {
         display: 'inline-block'
     }
 };
+
 },{}],6:[function(require,module,exports){
 "use strict";
 
@@ -543,7 +547,7 @@ var ChatFeed = function (_React$Component) {
                 if (!messages[index + 1] || messages[index + 1].id !== message.id) {
                     var messageGroup = group;
                     group = [];
-                    return React.createElement(BubbleGroup_1.default, { key: index, messages: messageGroup, id: message.id, showSenderName: showSenderName, chatBubble: ChatBubble, avatar: message.avatar, timestamp: message.timestamp, parser: parser });
+                    return React.createElement(BubbleGroup_1.default, { key: index, messages: messageGroup, id: message.id, showSenderName: showSenderName, chatBubble: ChatBubble, avatar: message.avatar, timestamp: message.timestamp, parser: parser, bubbleStyles: bubbleStyles });
                 }
                 return null;
             });
@@ -572,6 +576,7 @@ var ChatFeed = function (_React$Component) {
 }(React.Component);
 
 exports.default = ChatFeed;
+
 },{"../BubbleGroup":2,"../ChatBubble":4,"../ChatInput":8,"../Message":9,"./styles":7,"react":35}],7:[function(require,module,exports){
 "use strict";
 
@@ -600,6 +605,7 @@ exports.default = {
         zIndex: 100
     }
 };
+
 },{}],8:[function(require,module,exports){
 "use strict";
 
@@ -627,6 +633,7 @@ var ChatInput = function ChatInput(props) {
     return React.createElement("div", { className: "chat-input", style: styles.chatInput }, React.createElement("input", { type: "text", style: inputStyles || styles.inputStyle, placeholder: inputPlaceholder }));
 };
 exports.default = ChatInput;
+
 },{"react":35}],9:[function(require,module,exports){
 "use strict";
 
@@ -645,11 +652,12 @@ var Message = function Message(messageData) {
     this.type = messageData.type || 'text';
     this.isRead = messageData.isRead || false;
     this.metaData = messageData.metaData || {};
-    this.styles = messageData.styles || null;
     this.starred = messageData.starred || null;
+    this.styles = messageData.styles || null;
 };
 
 exports.default = Message;
+
 },{}],10:[function(require,module,exports){
 "use strict";
 
@@ -664,6 +672,7 @@ var _3 = require("./ChatInput/");
 exports.ChatInput = _3.default;
 var _4 = require("./Message/");
 exports.Message = _4.default;
+
 },{"./BubbleGroup":2,"./ChatBubble/":4,"./ChatFeed/":6,"./ChatInput/":8,"./Message/":9}],11:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
