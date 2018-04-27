@@ -52,8 +52,17 @@ export default class BubbleGroup extends React.Component {
               </div>
             )))}
           <div style={{width:"80%",display:'inline-block',float:(sampleMessage.id==0 ? 'right':'left')}}>
-            <div><h5 style={{display:"inline",verticalAlign:"text-top"}}>{(showSenderName && sampleMessage.id!==0) ? sampleMessage.senderName : senderName} <small style={{fontSize:'9px',marginLeft:'5px'}}>{timestamp ? moment(timestamp).fromNow():''} </small></h5></div> 
-            {messageNodes}
+            <div style={{float:(sampleMessage.id==0 ? 'right':'left')}}>
+              <h5 style={{display:"inline",verticalAlign:"text-top"}}>
+                {(showSenderName && sampleMessage.id!==0) ? sampleMessage.senderName : senderName}
+                <small style={{fontSize:'9px',marginLeft:'5px'}}>
+                  {timestamp ? moment(timestamp).fromNow():''}
+                </small>
+              </h5>
+            </div>
+            <div style={{marginTop: '1em'}}>
+              {messageNodes}
+            </div>
           </div>
       </div>
     );
