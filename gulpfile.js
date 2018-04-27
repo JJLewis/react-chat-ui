@@ -2,6 +2,7 @@ const gulp = require('gulp');
 const babel = require('gulp-babel');
 const plumber = require('gulp-plumber');
 const ts = require('gulp-typescript');
+const shell = require('gulp-shell')
 
 const project = ts.createProject('tsconfig.json');
 
@@ -23,4 +24,8 @@ gulp.task('compileRCT', () => {
 gulp.task('watch', () => {
   gulp.watch('src/**/*{ts,tsx}', ['compileTS']);
   gulp.watch('temp/**/*js', ['compileRCT']);
+  gulp.watch('lib/**/*js', ['buildDemo']);
 });
+
+// Build the demo
+gulp.task('buildDemo', shell.task('npm run build-demo'));
