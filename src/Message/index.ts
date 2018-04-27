@@ -13,7 +13,7 @@ interface MessageData {
   type?: string;
   isRead?: boolean;
   metaData?: any;
-
+  starred?: boolean;
 }
 
 export default class Message {
@@ -28,6 +28,7 @@ export default class Message {
   type?: string;
   isRead?: boolean;
   metaData?: any;
+  starred?: boolean;
   constructor(messageData: MessageData) {
     this.id = messageData.id; // id of the sender (0 is reserved for "blue bubble")
     this.message = messageData.message;
@@ -37,5 +38,6 @@ export default class Message {
     this.type=messageData.type || 'text';
     this.isRead=messageData.isRead || false;
     this.metaData=messageData.metaData || {};
+    this.starred = messageData.starred || null;
   }
 }
