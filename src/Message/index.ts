@@ -16,6 +16,7 @@ interface MessageData {
   metaData?: any;
   starred?: boolean;
   styles?: any;
+  toggleStarred?: (uid:number) => void;
 }
 
 export default class Message {
@@ -32,7 +33,7 @@ export default class Message {
   isRead?: boolean;
   metaData?: any;
   starred?: boolean;
-  toggleMessageStarred?: (uid:number) => void;
+  toggleStarred?: (uid:number) => void;
   styles?: any;
   constructor(messageData: MessageData) {
     this.uid = messageData.uid; // unique message identifier
@@ -44,7 +45,8 @@ export default class Message {
     this.type=messageData.type || 'text';
     this.isRead=messageData.isRead || false;
     this.metaData=messageData.metaData || {};
-    this.starred = messageData.starred || null;
+    this.starred = messageData.starred || false;
+    this.toggleStarred = messageData.toggleStarred || null;
     this.styles=messageData.styles || null;
   }
 }

@@ -50,6 +50,7 @@ class Chat extends React.Component {
     this.state = {
       messages: [
         new Message({
+          uid: 0,
           id: 1,
           message: "I'm the recipient! (The person you're talking to)",
           senderName: "George",
@@ -57,6 +58,7 @@ class Chat extends React.Component {
           timestamp: new Date(),
         }),
         new Message({
+          uid: 1,
           id: 1,
           message: "This needs to be in red..",
           senderName: "George",
@@ -67,6 +69,7 @@ class Chat extends React.Component {
           }
         }),
         new Message({
+          uid: 2,
           id: 1,
           message: "https://www.sample-videos.com/text/Sample-text-file-10kb.txt",
           senderName: "George",
@@ -80,6 +83,7 @@ class Chat extends React.Component {
           }
         }),
         new Message({
+          uid: 3,
           id: 0,
           message: 'Hey! Evan here. react-chat-ui is pretty dooope.',
           senderName: 'Evan',
@@ -89,6 +93,14 @@ class Chat extends React.Component {
       curr_user: 0,
     };
   }
+
+  toggleMessageStarred = (uid) => {
+    return () => {
+        const prevState = this.state;
+        prevState.messages[uid].starred = !prevState.messages[uid].starred;
+        this.setState(this.state);
+    };
+  };
 
   onPress(user) {
     this.setState({ curr_user: user });
@@ -108,12 +120,14 @@ class Chat extends React.Component {
   pushMessage(recipient, message) {
     const prevState = this.state;
     const newMessage = new Message({
+      uid: prevState.messages.length,
       id: recipient,
       message,
       senderName: users[recipient],
       avatar:avatars[users[recipient]],
       isRead: users[recipient]=='You',
-      timestamp: new Date()
+      timestamp: new Date(),
+      toggleStarred: this.toggleMessageStarred(prevState.messages.length)
     });
     prevState.messages.push(newMessage);
     this.setState(this.state);
@@ -200,18 +214,19 @@ class Chat extends React.Component {
         </div>
         <h2 className="text-center">There are Bubbles!</h2>
         <ChatBubble
-          message={new Message({ id: 1, message: 'I float to the left!' })}
+          message={new Message({ uid: 0, id: 1, message: 'I float to the left!' })}
         />
         <ChatBubble
-          message={new Message({ id: 0, message: 'I float to the right!' })}
+          message={new Message({ uid: 1, id: 0, message: 'I float to the right!' })}
         />
 
         <h2 className="text-center">And we have Bubble Groups!</h2>
         <BubbleGroup
           messages={[
-            new Message({ id: 1, message: 'Hey!' }),
-            new Message({ id: 1, message: 'I forgot to mention...' }),
+            new Message({ uid: 2, id: 1, message: 'Hey!' }),
+            new Message({ uid: 3, id: 1, message: 'I forgot to mention...' }),
             new Message({
+              uid: 4,
               id: 1,
               message:
                 "Oh no, I forgot... I think I was going to say I'm a BubbleGroup",
@@ -222,12 +237,13 @@ class Chat extends React.Component {
           senderName={'Elon Musk'}
         />
         <ChatBubble
-          message={new Message({ id: 2, message: "I 'm a single ChatBubble!" })}
+          message={new Message({ uid: 5, id: 2, message: "I 'm a single ChatBubble!" })}
         />
         <BubbleGroup
           messages={[
-            new Message({ id: 0, message: 'How could you forget already?!' }),
+            new Message({ uid: 6, id: 0, message: 'How could you forget already?!' }),
             new Message({
+              uid: 7,
               id: 0,
               message: "Oh well. I'm a BubbleGroup as well",
             }),

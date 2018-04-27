@@ -35,7 +35,7 @@ export default class Star extends React.Component {
     );
 
     return (
-      <div style={{float:(this.props.isUser ? 'right':'left')}}>
+      <div style={{float:(this.props.isUser ? 'right':'left')}} onClick={this.props.toggleStarred}>
         {starred ? starFull : starBorder}
       </div>
     );

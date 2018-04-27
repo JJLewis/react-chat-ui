@@ -74,14 +74,24 @@ var Chat = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).call(this));
 
+    _this.toggleMessageStarred = function (uid) {
+      return function () {
+        var prevState = _this.state;
+        prevState.messages[uid].starred = !prevState.messages[uid].starred;
+        _this.setState(_this.state);
+      };
+    };
+
     _this.state = {
       messages: [new _lib.Message({
+        uid: 0,
         id: 1,
         message: "I'm the recipient! (The person you're talking to)",
         senderName: "George",
         avatar: _react2.default.createElement('img', { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRArL5ZYgvYomgLZ6QKxjLO6iK-w6UqdRakfN56wFzWwE7ewq0O', style: { width: "50px" } }),
         timestamp: new Date()
       }), new _lib.Message({
+        uid: 1,
         id: 1,
         message: "This needs to be in red..",
         senderName: "George",
@@ -91,6 +101,7 @@ var Chat = function (_React$Component) {
           bubbleStyles: { backgroundColor: 'red' }
         }
       }), new _lib.Message({
+        uid: 2,
         id: 1,
         message: "https://www.sample-videos.com/text/Sample-text-file-10kb.txt",
         senderName: "George",
@@ -103,6 +114,7 @@ var Chat = function (_React$Component) {
           thumbnail: 'https://png.icons8.com/cotton/2x/document.png'
         }
       }), new _lib.Message({
+        uid: 3,
         id: 0,
         message: 'Hey! Evan here. react-chat-ui is pretty dooope.',
         senderName: 'Evan'
@@ -135,12 +147,14 @@ var Chat = function (_React$Component) {
     value: function pushMessage(recipient, message) {
       var prevState = this.state;
       var newMessage = new _lib.Message({
+        uid: prevState.messages.length,
         id: recipient,
         message: message,
         senderName: users[recipient],
         avatar: avatars[users[recipient]],
         isRead: users[recipient] == 'You',
-        timestamp: new Date()
+        timestamp: new Date(),
+        toggleStarred: this.toggleMessageStarred(prevState.messages.length)
       });
       prevState.messages.push(newMessage);
       this.setState(this.state);
@@ -261,10 +275,10 @@ var Chat = function (_React$Component) {
           'There are Bubbles!'
         ),
         _react2.default.createElement(_lib.ChatBubble, {
-          message: new _lib.Message({ id: 1, message: 'I float to the left!' })
+          message: new _lib.Message({ uid: 0, id: 1, message: 'I float to the left!' })
         }),
         _react2.default.createElement(_lib.ChatBubble, {
-          message: new _lib.Message({ id: 0, message: 'I float to the right!' })
+          message: new _lib.Message({ uid: 1, id: 0, message: 'I float to the right!' })
         }),
         _react2.default.createElement(
           'h2',
@@ -272,7 +286,8 @@ var Chat = function (_React$Component) {
           'And we have Bubble Groups!'
         ),
         _react2.default.createElement(_lib.BubbleGroup, {
-          messages: [new _lib.Message({ id: 1, message: 'Hey!' }), new _lib.Message({ id: 1, message: 'I forgot to mention...' }), new _lib.Message({
+          messages: [new _lib.Message({ uid: 2, id: 1, message: 'Hey!' }), new _lib.Message({ uid: 3, id: 1, message: 'I forgot to mention...' }), new _lib.Message({
+            uid: 4,
             id: 1,
             message: "Oh no, I forgot... I think I was going to say I'm a BubbleGroup"
           })],
@@ -281,10 +296,11 @@ var Chat = function (_React$Component) {
           senderName: 'Elon Musk'
         }),
         _react2.default.createElement(_lib.ChatBubble, {
-          message: new _lib.Message({ id: 2, message: "I 'm a single ChatBubble!" })
+          message: new _lib.Message({ uid: 5, id: 2, message: "I 'm a single ChatBubble!" })
         }),
         _react2.default.createElement(_lib.BubbleGroup, {
-          messages: [new _lib.Message({ id: 0, message: 'How could you forget already?!' }), new _lib.Message({
+          messages: [new _lib.Message({ uid: 6, id: 0, message: 'How could you forget already?!' }), new _lib.Message({
+            uid: 7,
             id: 0,
             message: "Oh well. I'm a BubbleGroup as well"
           })],

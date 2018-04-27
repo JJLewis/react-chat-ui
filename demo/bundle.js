@@ -75,14 +75,24 @@ var Chat = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).call(this));
 
+    _this.toggleMessageStarred = function (uid) {
+      return function () {
+        var prevState = _this.state;
+        prevState.messages[uid].starred = !prevState.messages[uid].starred;
+        _this.setState(_this.state);
+      };
+    };
+
     _this.state = {
       messages: [new _lib.Message({
+        uid: 0,
         id: 1,
         message: "I'm the recipient! (The person you're talking to)",
         senderName: "George",
         avatar: _react2.default.createElement('img', { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRArL5ZYgvYomgLZ6QKxjLO6iK-w6UqdRakfN56wFzWwE7ewq0O', style: { width: "50px" } }),
         timestamp: new Date()
       }), new _lib.Message({
+        uid: 1,
         id: 1,
         message: "This needs to be in red..",
         senderName: "George",
@@ -92,6 +102,7 @@ var Chat = function (_React$Component) {
           bubbleStyles: { backgroundColor: 'red' }
         }
       }), new _lib.Message({
+        uid: 2,
         id: 1,
         message: "https://www.sample-videos.com/text/Sample-text-file-10kb.txt",
         senderName: "George",
@@ -104,6 +115,7 @@ var Chat = function (_React$Component) {
           thumbnail: 'https://png.icons8.com/cotton/2x/document.png'
         }
       }), new _lib.Message({
+        uid: 3,
         id: 0,
         message: 'Hey! Evan here. react-chat-ui is pretty dooope.',
         senderName: 'Evan'
@@ -136,12 +148,14 @@ var Chat = function (_React$Component) {
     value: function pushMessage(recipient, message) {
       var prevState = this.state;
       var newMessage = new _lib.Message({
+        uid: prevState.messages.length,
         id: recipient,
         message: message,
         senderName: users[recipient],
         avatar: avatars[users[recipient]],
         isRead: users[recipient] == 'You',
-        timestamp: new Date()
+        timestamp: new Date(),
+        toggleStarred: this.toggleMessageStarred(prevState.messages.length)
       });
       prevState.messages.push(newMessage);
       this.setState(this.state);
@@ -262,10 +276,10 @@ var Chat = function (_React$Component) {
           'There are Bubbles!'
         ),
         _react2.default.createElement(_lib.ChatBubble, {
-          message: new _lib.Message({ id: 1, message: 'I float to the left!' })
+          message: new _lib.Message({ uid: 0, id: 1, message: 'I float to the left!' })
         }),
         _react2.default.createElement(_lib.ChatBubble, {
-          message: new _lib.Message({ id: 0, message: 'I float to the right!' })
+          message: new _lib.Message({ uid: 1, id: 0, message: 'I float to the right!' })
         }),
         _react2.default.createElement(
           'h2',
@@ -273,7 +287,8 @@ var Chat = function (_React$Component) {
           'And we have Bubble Groups!'
         ),
         _react2.default.createElement(_lib.BubbleGroup, {
-          messages: [new _lib.Message({ id: 1, message: 'Hey!' }), new _lib.Message({ id: 1, message: 'I forgot to mention...' }), new _lib.Message({
+          messages: [new _lib.Message({ uid: 2, id: 1, message: 'Hey!' }), new _lib.Message({ uid: 3, id: 1, message: 'I forgot to mention...' }), new _lib.Message({
+            uid: 4,
             id: 1,
             message: "Oh no, I forgot... I think I was going to say I'm a BubbleGroup"
           })],
@@ -282,10 +297,11 @@ var Chat = function (_React$Component) {
           senderName: 'Elon Musk'
         }),
         _react2.default.createElement(_lib.ChatBubble, {
-          message: new _lib.Message({ id: 2, message: "I 'm a single ChatBubble!" })
+          message: new _lib.Message({ uid: 5, id: 2, message: "I 'm a single ChatBubble!" })
         }),
         _react2.default.createElement(_lib.BubbleGroup, {
-          messages: [new _lib.Message({ id: 0, message: 'How could you forget already?!' }), new _lib.Message({
+          messages: [new _lib.Message({ uid: 6, id: 0, message: 'How could you forget already?!' }), new _lib.Message({
+            uid: 7,
             id: 0,
             message: "Oh well. I'm a BubbleGroup as well"
           })],
@@ -302,7 +318,7 @@ var Chat = function (_React$Component) {
 
 (0, _reactDom.render)(_react2.default.createElement(Chat, null), document.getElementById('chat-ui'));
 
-},{"../lib":10,"react":35,"react-dom":32}],2:[function(require,module,exports){
+},{"../lib":11,"react":36,"react-dom":33}],2:[function(require,module,exports){
 "use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -346,7 +362,7 @@ var BubbleGroup = function (_React$Component) {
             var messageNodes = messages.map(function (message, i) {
                 return React.createElement(ChatBubble, { key: i, message: message, bubblesCentered: bubblesCentered, bubbleStyles: bubbleStyles, parser: parser });
             });
-            return React.createElement("div", { style: styles_1.default.chatbubbleWrapper }, showSenderName && (senderName || sampleMessage.senderName) !== '' && sampleMessage.id !== 0 && React.createElement("div", { style: styles_1.default.bubbleGroupHeader }, avatar || ''), React.createElement("div", { style: { width: "80%", display: 'inline-block', float: sampleMessage.id == 0 ? 'right' : 'left' } }, React.createElement("div", null, React.createElement("h5", { style: { display: "inline", verticalAlign: "text-top" } }, showSenderName && sampleMessage.id !== 0 ? sampleMessage.senderName : senderName, " ", React.createElement("small", { style: { fontSize: '9px', marginLeft: '5px' } }, timestamp ? moment(timestamp).fromNow() : '', " "))), messageNodes));
+            return React.createElement("div", { style: styles_1.default.chatbubbleWrapper }, showSenderName && (senderName || sampleMessage.senderName) !== '' && sampleMessage.id !== 0 && React.createElement("div", { style: styles_1.default.bubbleGroupHeader }, avatar || ''), React.createElement("div", { style: { width: "80%", display: 'inline-block', float: sampleMessage.id == 0 ? 'right' : 'left' } }, React.createElement("div", { style: { float: sampleMessage.id == 0 ? 'right' : 'left' } }, React.createElement("h5", { style: { display: "inline", verticalAlign: "text-top" } }, showSenderName && sampleMessage.id !== 0 ? sampleMessage.senderName : senderName, React.createElement("small", { style: { fontSize: '9px', marginLeft: '5px' } }, timestamp ? moment(timestamp).fromNow() : ''))), React.createElement("div", { style: { marginTop: '1em' } }, messageNodes)));
         }
     }, {
         key: "render",
@@ -364,7 +380,7 @@ var BubbleGroup = function (_React$Component) {
 
 exports.default = BubbleGroup;
 
-},{"../ChatBubble":4,"./styles":3,"moment":25,"react":35}],3:[function(require,module,exports){
+},{"../ChatBubble":4,"./styles":3,"moment":26,"react":36}],3:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -401,6 +417,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var styles_1 = require("./styles");
+var Star_1 = require("../Star");
 var defaultBubbleStyles = {
     userBubble: {},
     chatbubble: {},
@@ -432,7 +449,7 @@ var ChatBubble = function (_React$Component) {
 
             var readStatus = this.props.message.id === 0 && this.props.message.isRead && React.createElement("svg", { style: { float: 'right', display: 'inline-block', position: 'absolute', bottom: 0, right: 0 }, version: "1.1", id: "Layer_1", xmlns: "http://www.w3.org/2000/svg", x: "0px", y: "0px", viewBox: "0 0 50 50", width: "15", height: "15" }, React.createElement("g", { id: "surface1_4_" }, React.createElement("path", { fill: "#CCFF90", d: "M34.602,14.602L21,28.199l-5.602-5.598l-2.797,2.797L21,33.801l16.398-16.402L34.602,14.602z" })));
             var chatBubbleStyles = this.props.message.id === 0 ? Object.assign({}, styles_1.default.chatbubble, bubblesCentered ? {} : styles_1.default.chatbubbleOrientationNormal, chatbubble, userBubble, this.props.message.styles && this.props.message.styles.bubbleStyles ? this.props.message.styles.bubbleStyles : {}) : Object.assign({}, styles_1.default.chatbubble, styles_1.default.recipientChatbubble, bubblesCentered ? {} : styles_1.default.recipientChatbubbleOrientationNormal, userBubble, chatbubble, this.props.message.styles && this.props.message.styles.bubbleStyles ? this.props.message.styles.bubbleStyles : {});
-            return React.createElement("div", { style: Object.assign({}, styles_1.default.chatbubbleWrapper) }, this.props.message.type == "text" && React.createElement("div", { style: chatBubbleStyles }, React.createElement("p", { style: Object.assign({}, styles_1.default.p, text) }, parser ? parser(this.props.message.message) : this.props.message.message), readStatus), this.props.message.type === "image" && React.createElement("div", { style: chatBubbleStyles }, React.createElement("p", { style: Object.assign({}, styles_1.default.p, text) }, React.createElement("img", { src: this.props.message.message, style: { maxHeight: '100px' } })), readStatus), this.props.message.type === "file" && React.createElement("div", { style: chatBubbleStyles }, React.createElement("p", { style: Object.assign({}, styles_1.default.p, text) }, React.createElement("a", { href: this.props.message.message, download: this.props.message.metaData.name || 'ChatFile' }, this.props.message.metaData.thumbnail && React.createElement("img", { style: { maxWidth: '50px', height: 'auto' }, src: this.props.message.metaData.thumbnail }), this.props.message.metaData.fileType && React.createElement("h4", { style: { textAlign: 'center' } }, " ", "Download " + (this.props.message.metaData.name || 'file') + " " + this.props.message.metaData.fileType, " "))), readStatus));
+            return React.createElement("div", { style: Object.assign({}, styles_1.default.chatbubbleWrapper) }, this.props.message.toggleStarred !== null && React.createElement(Star_1.default, { starred: this.props.message.starred, isUser: this.props.message.id == 0, toggleStarred: this.props.message.toggleStarred }), this.props.message.type == "text" && React.createElement("div", { style: chatBubbleStyles }, React.createElement("p", { style: Object.assign({}, styles_1.default.p, text) }, parser ? parser(this.props.message.message) : this.props.message.message), readStatus), this.props.message.type === "image" && React.createElement("div", { style: chatBubbleStyles }, React.createElement("p", { style: Object.assign({}, styles_1.default.p, text) }, React.createElement("img", { src: this.props.message.message, style: { maxHeight: '100px' } })), readStatus), this.props.message.type === "file" && React.createElement("div", { style: chatBubbleStyles }, React.createElement("p", { style: Object.assign({}, styles_1.default.p, text) }, React.createElement("a", { href: this.props.message.message, download: this.props.message.metaData.name || 'ChatFile' }, this.props.message.metaData.thumbnail && React.createElement("img", { style: { maxWidth: '50px', height: 'auto' }, src: this.props.message.metaData.thumbnail }), this.props.message.metaData.fileType && React.createElement("h4", { style: { textAlign: 'center' } }, " ", "Download " + (this.props.message.metaData.name || 'file') + " " + this.props.message.metaData.fileType, " "))), readStatus));
         }
     }]);
 
@@ -441,7 +458,7 @@ var ChatBubble = function (_React$Component) {
 
 exports.default = ChatBubble;
 
-},{"./styles":5,"react":35}],5:[function(require,module,exports){
+},{"../Star":10,"./styles":5,"react":36}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -552,7 +569,7 @@ var ChatFeed = function (_React$Component) {
                 return null;
             });
             if (isTyping) {
-                messageNodes.push(React.createElement("div", { key: "isTyping", style: Object.assign({}, styles_1.default.chatbubbleWrapper) }, React.createElement(ChatBubble, { message: new Message_1.default({ id: 1, message: '...', senderName: '' }), bubbleStyles: bubbleStyles })));
+                messageNodes.push(React.createElement("div", { key: "isTyping", style: Object.assign({}, styles_1.default.chatbubbleWrapper) }, React.createElement(ChatBubble, { message: new Message_1.default({ uid: -1, id: 1, message: '...', senderName: '' }), bubbleStyles: bubbleStyles })));
             }
             return messageNodes;
         }
@@ -577,7 +594,7 @@ var ChatFeed = function (_React$Component) {
 
 exports.default = ChatFeed;
 
-},{"../BubbleGroup":2,"../ChatBubble":4,"../ChatInput":8,"../Message":9,"./styles":7,"react":35}],7:[function(require,module,exports){
+},{"../BubbleGroup":2,"../ChatBubble":4,"../ChatInput":8,"../Message":9,"./styles":7,"react":36}],7:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -634,7 +651,7 @@ var ChatInput = function ChatInput(props) {
 };
 exports.default = ChatInput;
 
-},{"react":35}],9:[function(require,module,exports){
+},{"react":36}],9:[function(require,module,exports){
 "use strict";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -644,6 +661,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Message = function Message(messageData) {
     _classCallCheck(this, Message);
 
+    this.uid = messageData.uid;
     this.id = messageData.id;
     this.message = messageData.message;
     this.senderName = messageData.senderName || undefined;
@@ -652,13 +670,59 @@ var Message = function Message(messageData) {
     this.type = messageData.type || 'text';
     this.isRead = messageData.isRead || false;
     this.metaData = messageData.metaData || {};
-    this.starred = messageData.starred || null;
+    this.starred = messageData.starred || false;
+    this.toggleStarred = messageData.toggleStarred || null;
     this.styles = messageData.styles || null;
 };
 
 exports.default = Message;
 
 },{}],10:[function(require,module,exports){
+"use strict";
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = require("react");
+var defaultStarStyles = {
+    color: '#000000',
+    size: 24
+};
+
+var Star = function (_React$Component) {
+    _inherits(Star, _React$Component);
+
+    function Star(props) {
+        _classCallCheck(this, Star);
+
+        return _possibleConstructorReturn(this, (Star.__proto__ || Object.getPrototypeOf(Star)).call(this, props));
+    }
+
+    _createClass(Star, [{
+        key: "render",
+        value: function render() {
+            var style = this.props.style;
+
+            style = style || defaultStarStyles;
+            var starred = this.props.starred || false;
+            var starFull = React.createElement("svg", { fill: style.color, height: style.size, width: style.size, xmlns: "http://www.w3.org/2000/svg" }, React.createElement("path", { d: "M0 0h24v24H0z", fill: "none" }), React.createElement("path", { d: "M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" }), React.createElement("path", { d: "M0 0h24v24H0z", fill: "none" }));
+            var starBorder = React.createElement("svg", { fill: style.color, height: style.size, width: style.size, xmlns: "http://www.w3.org/2000/svg" }, React.createElement("path", { d: "M22 9.24l-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27 1-4.28-3.32-2.88 4.38-.38L12 6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28L12 15.4z" }), React.createElement("path", { d: "M0 0h24v24H0z", fill: "none" }));
+            return React.createElement("div", { style: { float: this.props.isUser ? 'right' : 'left' }, onClick: this.props.toggleStarred }, starred ? starFull : starBorder);
+        }
+    }]);
+
+    return Star;
+}(React.Component);
+
+exports.default = Star;
+
+},{"react":36}],11:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -673,7 +737,7 @@ exports.ChatInput = _3.default;
 var _4 = require("./Message/");
 exports.Message = _4.default;
 
-},{"./BubbleGroup":2,"./ChatBubble/":4,"./ChatFeed/":6,"./ChatInput/":8,"./Message/":9}],11:[function(require,module,exports){
+},{"./BubbleGroup":2,"./ChatBubble/":4,"./ChatFeed/":6,"./ChatInput/":8,"./Message/":9}],12:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -707,7 +771,7 @@ var ExecutionEnvironment = {
 };
 
 module.exports = ExecutionEnvironment;
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 "use strict";
 
 /**
@@ -737,7 +801,7 @@ function camelize(string) {
 }
 
 module.exports = camelize;
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -775,7 +839,7 @@ function camelizeStyleName(string) {
 }
 
 module.exports = camelizeStyleName;
-},{"./camelize":12}],14:[function(require,module,exports){
+},{"./camelize":13}],15:[function(require,module,exports){
 'use strict';
 
 /**
@@ -813,7 +877,7 @@ function containsNode(outerNode, innerNode) {
 }
 
 module.exports = containsNode;
-},{"./isTextNode":22}],15:[function(require,module,exports){
+},{"./isTextNode":23}],16:[function(require,module,exports){
 "use strict";
 
 /**
@@ -850,7 +914,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 };
 
 module.exports = emptyFunction;
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -870,7 +934,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = emptyObject;
 }).call(this,require('_process'))
-},{"_process":27}],17:[function(require,module,exports){
+},{"_process":28}],18:[function(require,module,exports){
 'use strict';
 
 /**
@@ -907,7 +971,7 @@ function getActiveElement(doc) /*?DOMElement*/{
 }
 
 module.exports = getActiveElement;
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 'use strict';
 
 /**
@@ -938,7 +1002,7 @@ function hyphenate(string) {
 }
 
 module.exports = hyphenate;
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -975,7 +1039,7 @@ function hyphenateStyleName(string) {
 }
 
 module.exports = hyphenateStyleName;
-},{"./hyphenate":18}],20:[function(require,module,exports){
+},{"./hyphenate":19}],21:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -1031,7 +1095,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 }).call(this,require('_process'))
-},{"_process":27}],21:[function(require,module,exports){
+},{"_process":28}],22:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1054,7 +1118,7 @@ function isNode(object) {
 }
 
 module.exports = isNode;
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1077,7 +1141,7 @@ function isTextNode(object) {
 }
 
 module.exports = isTextNode;
-},{"./isNode":21}],23:[function(require,module,exports){
+},{"./isNode":22}],24:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -1143,7 +1207,7 @@ function shallowEqual(objA, objB) {
 }
 
 module.exports = shallowEqual;
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -1208,7 +1272,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = warning;
 }).call(this,require('_process'))
-},{"./emptyFunction":15,"_process":27}],25:[function(require,module,exports){
+},{"./emptyFunction":16,"_process":28}],26:[function(require,module,exports){
 //! moment.js
 
 ;(function (global, factory) {
@@ -5716,7 +5780,7 @@ module.exports = warning;
 
 })));
 
-},{}],26:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 /*
 object-assign
 (c) Sindre Sorhus
@@ -5808,7 +5872,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
-},{}],27:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -5994,7 +6058,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],28:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -6057,7 +6121,7 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
 module.exports = checkPropTypes;
 
 }).call(this,require('_process'))
-},{"./lib/ReactPropTypesSecret":29,"_process":27,"fbjs/lib/invariant":20,"fbjs/lib/warning":24}],29:[function(require,module,exports){
+},{"./lib/ReactPropTypesSecret":30,"_process":28,"fbjs/lib/invariant":21,"fbjs/lib/warning":25}],30:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -6071,7 +6135,7 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
 
-},{}],30:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 (function (process){
 /** @license React v16.3.2
  * react-dom.development.js
@@ -22729,7 +22793,7 @@ module.exports = reactDom;
 }
 
 }).call(this,require('_process'))
-},{"_process":27,"fbjs/lib/ExecutionEnvironment":11,"fbjs/lib/camelizeStyleName":13,"fbjs/lib/containsNode":14,"fbjs/lib/emptyFunction":15,"fbjs/lib/emptyObject":16,"fbjs/lib/getActiveElement":17,"fbjs/lib/hyphenateStyleName":19,"fbjs/lib/invariant":20,"fbjs/lib/shallowEqual":23,"fbjs/lib/warning":24,"object-assign":26,"prop-types/checkPropTypes":28,"react":35}],31:[function(require,module,exports){
+},{"_process":28,"fbjs/lib/ExecutionEnvironment":12,"fbjs/lib/camelizeStyleName":14,"fbjs/lib/containsNode":15,"fbjs/lib/emptyFunction":16,"fbjs/lib/emptyObject":17,"fbjs/lib/getActiveElement":18,"fbjs/lib/hyphenateStyleName":20,"fbjs/lib/invariant":21,"fbjs/lib/shallowEqual":24,"fbjs/lib/warning":25,"object-assign":27,"prop-types/checkPropTypes":29,"react":36}],32:[function(require,module,exports){
 /** @license React v16.3.2
  * react-dom.production.min.js
  *
@@ -22977,7 +23041,7 @@ var Gg={createPortal:Fg,findDOMNode:function(a){return null==a?null:1===a.nodeTy
 null})}),!0):!1},unstable_createPortal:function(){return Fg.apply(void 0,arguments)},unstable_batchedUpdates:X.batchedUpdates,unstable_deferredUpdates:X.deferredUpdates,flushSync:X.flushSync,unstable_flushControlled:X.flushControlled,__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:{EventPluginHub:Ra,EventPluginRegistry:Ca,EventPropagators:kb,ReactControlledComponent:$b,ReactDOMComponentTree:bb,ReactDOMEventListener:$d},unstable_createRoot:function(a,b){return new tg(a,!0,null!=b&&!0===b.hydrate)}};
 X.injectIntoDevTools({findFiberByHostInstance:Ua,bundleType:0,version:"16.3.2",rendererPackageName:"react-dom"});var Hg=Object.freeze({default:Gg}),Ig=Hg&&Gg||Hg;module.exports=Ig["default"]?Ig["default"]:Ig;
 
-},{"fbjs/lib/ExecutionEnvironment":11,"fbjs/lib/containsNode":14,"fbjs/lib/emptyFunction":15,"fbjs/lib/emptyObject":16,"fbjs/lib/getActiveElement":17,"fbjs/lib/invariant":20,"fbjs/lib/shallowEqual":23,"object-assign":26,"react":35}],32:[function(require,module,exports){
+},{"fbjs/lib/ExecutionEnvironment":12,"fbjs/lib/containsNode":15,"fbjs/lib/emptyFunction":16,"fbjs/lib/emptyObject":17,"fbjs/lib/getActiveElement":18,"fbjs/lib/invariant":21,"fbjs/lib/shallowEqual":24,"object-assign":27,"react":36}],33:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -23019,7 +23083,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./cjs/react-dom.development.js":30,"./cjs/react-dom.production.min.js":31,"_process":27}],33:[function(require,module,exports){
+},{"./cjs/react-dom.development.js":31,"./cjs/react-dom.production.min.js":32,"_process":28}],34:[function(require,module,exports){
 (function (process){
 /** @license React v16.3.2
  * react.development.js
@@ -24437,7 +24501,7 @@ module.exports = react;
 }
 
 }).call(this,require('_process'))
-},{"_process":27,"fbjs/lib/emptyFunction":15,"fbjs/lib/emptyObject":16,"fbjs/lib/invariant":20,"fbjs/lib/warning":24,"object-assign":26,"prop-types/checkPropTypes":28}],34:[function(require,module,exports){
+},{"_process":28,"fbjs/lib/emptyFunction":16,"fbjs/lib/emptyObject":17,"fbjs/lib/invariant":21,"fbjs/lib/warning":25,"object-assign":27,"prop-types/checkPropTypes":29}],35:[function(require,module,exports){
 /** @license React v16.3.2
  * react.production.min.js
  *
@@ -24461,7 +24525,7 @@ _calculateChangedBits:b,_defaultValue:a,_currentValue:a,_changedBits:0,Provider:
 (k=a.type.defaultProps);for(c in b)J.call(b,c)&&!K.hasOwnProperty(c)&&(d[c]=void 0===b[c]&&void 0!==k?k[c]:b[c])}c=arguments.length-2;if(1===c)d.children=e;else if(1<c){k=Array(c);for(var l=0;l<c;l++)k[l]=arguments[l+2];d.children=k}return{$$typeof:t,type:a.type,key:g,ref:h,props:d,_owner:f}},createFactory:function(a){var b=L.bind(null,a);b.type=a;return b},isValidElement:M,version:"16.3.2",__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:{ReactCurrentOwner:I,assign:m}},X=Object.freeze({default:W}),
 Y=X&&W||X;module.exports=Y["default"]?Y["default"]:Y;
 
-},{"fbjs/lib/emptyFunction":15,"fbjs/lib/emptyObject":16,"fbjs/lib/invariant":20,"object-assign":26}],35:[function(require,module,exports){
+},{"fbjs/lib/emptyFunction":16,"fbjs/lib/emptyObject":17,"fbjs/lib/invariant":21,"object-assign":27}],36:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -24472,4 +24536,4 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./cjs/react.development.js":33,"./cjs/react.production.min.js":34,"_process":27}]},{},[1]);
+},{"./cjs/react.development.js":34,"./cjs/react.production.min.js":35,"_process":28}]},{},[1]);

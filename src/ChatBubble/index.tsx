@@ -59,41 +59,44 @@ export default class ChatBubble extends React.Component {
           ...styles.chatbubbleWrapper,
         }}
       >
-        <Star starred={this.props.message.starred} isUser={this.props.message.id == 0}/>
+        {
+          this.props.message.toggleStarred !== null &&
+          (<Star starred={this.props.message.starred} isUser={this.props.message.id == 0}
+                toggleStarred={this.props.message.toggleStarred}/>)
+        }
+        {
+          this.props.message.type=="text" &&
+          (<div style={chatBubbleStyles}>
+            <p style={{ ...styles.p, ...text }}>{parser?parser(this.props.message.message):this.props.message.message}</p>
+            {readStatus}
+          </div>)
+        }
 
         {
-        this.props.message.type=="text" &&
-        (<div style={chatBubbleStyles}>
-          <p style={{ ...styles.p, ...text }}>{parser?parser(this.props.message.message):this.props.message.message}</p>
-          {readStatus}
-        </div>)
-      }
-
-      {
-        this.props.message.type==="image" &&
-        (<div style={chatBubbleStyles}>
-          <p style={{ ...styles.p, ...text }}>
-            <img src={this.props.message.message} style={{maxHeight:'100px'}}/>
-          </p>
-          {readStatus}
-        </div>)
-      }
-      {
-        this.props.message.type==="file" &&
-        (<div style={chatBubbleStyles}>
-          <p style={{...styles.p,...text}}>
-            <a href={this.props.message.message} download={this.props.message.metaData.name || 'ChatFile'}>
-              {
-                this.props.message.metaData.thumbnail && <img style={{maxWidth:'50px',height:'auto'}} src={this.props.message.metaData.thumbnail}/>
-              }
-              {
-                this.props.message.metaData.fileType && <h4 style={{textAlign:'center'}}> {`Download ${this.props.message.metaData.name || 'file'} ${this.props.message.metaData.fileType}`} </h4>
-              }
-            </a>
-          </p>
-          {readStatus}
-        </div>)
-      }
+          this.props.message.type==="image" &&
+          (<div style={chatBubbleStyles}>
+            <p style={{ ...styles.p, ...text }}>
+              <img src={this.props.message.message} style={{maxHeight:'100px'}}/>
+            </p>
+            {readStatus}
+          </div>)
+        }
+        {
+          this.props.message.type==="file" &&
+          (<div style={chatBubbleStyles}>
+            <p style={{...styles.p,...text}}>
+              <a href={this.props.message.message} download={this.props.message.metaData.name || 'ChatFile'}>
+                {
+                  this.props.message.metaData.thumbnail && <img style={{maxWidth:'50px',height:'auto'}} src={this.props.message.metaData.thumbnail}/>
+                }
+                {
+                  this.props.message.metaData.fileType && <h4 style={{textAlign:'center'}}> {`Download ${this.props.message.metaData.name || 'file'} ${this.props.message.metaData.fileType}`} </h4>
+                }
+              </a>
+            </p>
+            {readStatus}
+          </div>)
+        }
       </div>
     );
   }
