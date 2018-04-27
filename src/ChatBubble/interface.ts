@@ -7,5 +7,5 @@ export default interface ChatBubbleProps {
     text: object
   }
   bubblesCentered: boolean,
-  parser?:any
+  parser?:any,
 }

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import ChatBubbleProps from './interface';
 import styles from './styles';
+import Star from "../Star";
 
 const defaultBubbleStyles = {
   userBubble: {},
@@ -91,11 +92,12 @@ export default class ChatBubble extends React.Component {
           {readStatus}
         </div>)
       }
-      
-       
+      <Star starred={this.props.message.starred} isUser={this.props.message.id == 0}/>
       </div>
     );
   }
 }
+/*
 
+ */
 export { ChatBubbleProps };
