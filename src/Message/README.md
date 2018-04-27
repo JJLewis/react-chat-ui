@@ -12,8 +12,16 @@ The `Message` object is the standard class for handling message data in `react-c
 * **type**: Type of message default to text but can be any of 'text','image' or 'file'
 * **isRead**: Determines of your message is read by other person or not defaults to false
 * **metaData**: Object that holds the attributes 'thumbnail' - url of image to display as thumbnail , 'name' - name of file , 'fileType' which are used to further specify the data for any other type other than text on 'type' field
+* **styles**: Apply individual styles to bubbles overiding the norm , needs to contain the an attribute 'bubbleStyles' containing react style object
 ```javascript
-const myMessage = new Message(1, 'Hello World!', 'Elon Musk');
+const myMessage = new Message(1, 
+'Hello World!', 
+'Elon Musk',
+<img src='./myimage.png'/>,new Date(),
+'text',
+true,
+{},
+{bubbleStyles:{backgroundColor:'green'}});
 
 const anotherMessage = new Message(0, 'Hey Elon!');
 ```

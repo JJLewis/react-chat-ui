@@ -48,7 +48,7 @@ render() {
       showSenderName // show the name of the user who sent the message
       bubblesCentered={false} //Boolean should the bubbles be centered in the feed?
       style={{height:400px}}// styles for feed
-
+      parser={(text)=>{return text}} // Common parser for any  text messages rendered on a bubble (good for rendering empoticons if any) optional and you can igrnore this 
       // JSON: Custom bubble styles
       bubbleStyles={
         {
@@ -83,7 +83,10 @@ this.state = {
       senderName: "George",
       avatar:<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRArL5ZYgvYomgLZ6QKxjLO6iK-w6UqdRakfN56wFzWwE7ewq0O"/>,
       timestamp: new Date(),
-      type:'text'
+      type:'text',
+      styles:{
+        bubbleStyles:{backgroundColor:'green'} // apply individual styles if needed to bubbles
+      }
     }), // Gray bubble
     new Message({ id: 0, message: "I'm you -- the blue bubble!",isRead:true }), // Blue bubble
   ],

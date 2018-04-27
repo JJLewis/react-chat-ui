@@ -16,7 +16,7 @@ export default class ChatBubble extends React.Component {
   }
 
   public render() {
-    const { bubblesCentered } = this.props;
+    const { bubblesCentered,parser } = this.props;
     let { bubbleStyles } = this.props;
     bubbleStyles = bubbleStyles || defaultBubbleStyles;
     const { userBubble, chatbubble, text } = bubbleStyles;
@@ -41,15 +41,15 @@ export default class ChatBubble extends React.Component {
             ...bubblesCentered ? {} : styles.chatbubbleOrientationNormal,
             ...chatbubble,
             ...userBubble,
+            ...(this.props.message.styles && this.props.message.styles.bubbleStyles)? this.props.message.styles.bubbleStyles : {}
           }
         : {
             ...styles.chatbubble,
             ...styles.recipientChatbubble,
-            ...bubblesCentered
-              ? {}
-              : styles.recipientChatbubbleOrientationNormal,
+            ...bubblesCentered ? {} : styles.recipientChatbubbleOrientationNormal,
             ...userBubble,
-            ...chatbubble
+            ...chatbubble,
+            ...(this.props.message.styles && this.props.message.styles.bubbleStyles) ? this.props.message.styles.bubbleStyles : {}
           };
 
     return (
@@ -61,7 +61,7 @@ export default class ChatBubble extends React.Component {
       {
         this.props.message.type=="text" &&
         (<div style={chatBubbleStyles}>
-          <p style={{ ...styles.p, ...text }}>{this.props.message.message}</p>
+          <p style={{ ...styles.p, ...text }}>{parser?parser(this.props.message.message):this.props.message.message}</p>
           {readStatus}
         </div>)
       }
@@ -70,7 +70,7 @@ export default class ChatBubble extends React.Component {
         this.props.message.type==="image" &&
         (<div style={chatBubbleStyles}>
           <p style={{ ...styles.p, ...text }}>
-            <img src={this.props.message.message}/>
+            <img src={this.props.message.message} style={{maxHeight:'100px'}}/>
           </p>
           {readStatus}
         </div>)

@@ -21,6 +21,7 @@ interface ChatFeedInterface {
     showSenderName?: boolean;
     chatBubble?: React.Component;
     style:object;
+    parser?:any;
   };
 }
 
@@ -56,7 +57,7 @@ export default class ChatFeed extends React.Component {
    * Determines what type of message/messages to render.
    */
   renderMessages(messages: [Message]) {
-    const { isTyping, bubbleStyles, chatBubble, showSenderName } = this.props;
+    const { isTyping, bubbleStyles, chatBubble, showSenderName, parser } = this.props;
 
     const ChatBubble = chatBubble || DefaultChatBubble;
 
@@ -77,6 +78,7 @@ export default class ChatFeed extends React.Component {
             chatBubble={ChatBubble}
             avatar={message.avatar}
             timestamp={message.timestamp}
+            parser={parser}
           />
         );
       }

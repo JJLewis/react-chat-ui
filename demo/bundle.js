@@ -84,10 +84,13 @@ var Chat = function (_React$Component) {
         timestamp: new Date()
       }), new _lib.Message({
         id: 1,
-        message: "theres something else too..",
+        message: "This needs to be in red..",
         senderName: "George",
         avatar: _react2.default.createElement('img', { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRArL5ZYgvYomgLZ6QKxjLO6iK-w6UqdRakfN56wFzWwE7ewq0O', style: { width: "50px" } }),
-        timestamp: new Date()
+        timestamp: new Date(),
+        styles: {
+          bubbleStyles: { backgroundColor: 'red' }
+        }
       }), new _lib.Message({
         id: 1,
         message: "https://www.sample-videos.com/text/Sample-text-file-10kb.txt",
@@ -137,7 +140,8 @@ var Chat = function (_React$Component) {
         message: message,
         senderName: users[recipient],
         avatar: avatars[users[recipient]],
-        isRead: users[recipient] == 'You'
+        isRead: users[recipient] == 'You',
+        timestamp: new Date()
       });
       prevState.messages.push(newMessage);
       this.setState(this.state);
@@ -183,7 +187,10 @@ var Chat = function (_React$Component) {
           //chatBubble={this.state.useCustomBubble && customBubble}
           , { maxHeight: 'auto',
             messages: this.state.messages // Boolean: list of message objects
-            , showSenderName: true
+            , showSenderName: true,
+            parser: function parser(text) {
+              return text;
+            }
           }),
           _react2.default.createElement(
             'form',
@@ -331,12 +338,13 @@ var BubbleGroup = function (_React$Component) {
                 chatBubble = _props.chatBubble,
                 senderName = _props.senderName,
                 avatar = _props.avatar,
-                timestamp = _props.timestamp;
+                timestamp = _props.timestamp,
+                parser = _props.parser;
 
             var ChatBubble = chatBubble || ChatBubble_1.default;
             var sampleMessage = messages[0];
             var messageNodes = messages.map(function (message, i) {
-                return React.createElement(ChatBubble, { key: i, message: message, bubblesCentered: bubblesCentered, bubbleStyles: bubbleStyles });
+                return React.createElement(ChatBubble, { key: i, message: message, bubblesCentered: bubblesCentered, bubbleStyles: bubbleStyles, parser: parser });
             });
             return React.createElement("div", { style: styles_1.default.chatbubbleWrapper }, showSenderName && (senderName || sampleMessage.senderName) !== '' && sampleMessage.id !== 0 && React.createElement("div", { style: styles_1.default.bubbleGroupHeader }, avatar || ''), React.createElement("div", { style: { width: "80%", display: 'inline-block', float: sampleMessage.id == 0 ? 'right' : 'left' } }, React.createElement("div", null, React.createElement("h5", { style: { display: "inline", verticalAlign: "text-top" } }, showSenderName && sampleMessage.id !== 0 ? sampleMessage.senderName : senderName, " ", React.createElement("small", { style: { fontSize: '9px', marginLeft: '5px' } }, timestamp ? moment(timestamp).fromNow() : '', " "))), messageNodes));
         }
@@ -411,7 +419,9 @@ var ChatBubble = function (_React$Component) {
     _createClass(ChatBubble, [{
         key: "render",
         value: function render() {
-            var bubblesCentered = this.props.bubblesCentered;
+            var _props = this.props,
+                bubblesCentered = _props.bubblesCentered,
+                parser = _props.parser;
             var bubbleStyles = this.props.bubbleStyles;
 
             bubbleStyles = bubbleStyles || defaultBubbleStyles;
@@ -421,8 +431,8 @@ var ChatBubble = function (_React$Component) {
                 text = _bubbleStyles.text;
 
             var readStatus = this.props.message.id === 0 && this.props.message.isRead && React.createElement("svg", { style: { float: 'right', display: 'inline-block', position: 'absolute', bottom: 0, right: 0 }, version: "1.1", id: "Layer_1", xmlns: "http://www.w3.org/2000/svg", x: "0px", y: "0px", viewBox: "0 0 50 50", width: "15", height: "15" }, React.createElement("g", { id: "surface1_4_" }, React.createElement("path", { fill: "#CCFF90", d: "M34.602,14.602L21,28.199l-5.602-5.598l-2.797,2.797L21,33.801l16.398-16.402L34.602,14.602z" })));
-            var chatBubbleStyles = this.props.message.id === 0 ? Object.assign({}, styles_1.default.chatbubble, bubblesCentered ? {} : styles_1.default.chatbubbleOrientationNormal, chatbubble, userBubble) : Object.assign({}, styles_1.default.chatbubble, styles_1.default.recipientChatbubble, bubblesCentered ? {} : styles_1.default.recipientChatbubbleOrientationNormal, userBubble, chatbubble);
-            return React.createElement("div", { style: Object.assign({}, styles_1.default.chatbubbleWrapper) }, this.props.message.type == "text" && React.createElement("div", { style: chatBubbleStyles }, React.createElement("p", { style: Object.assign({}, styles_1.default.p, text) }, this.props.message.message), readStatus), this.props.message.type === "image" && React.createElement("div", { style: chatBubbleStyles }, React.createElement("p", { style: Object.assign({}, styles_1.default.p, text) }, React.createElement("img", { src: this.props.message.message })), readStatus), this.props.message.type === "file" && React.createElement("div", { style: chatBubbleStyles }, React.createElement("p", { style: Object.assign({}, styles_1.default.p, text) }, React.createElement("a", { href: this.props.message.message, download: this.props.message.metaData.name || 'ChatFile' }, this.props.message.metaData.thumbnail && React.createElement("img", { style: { maxWidth: '50px', height: 'auto' }, src: this.props.message.metaData.thumbnail }), this.props.message.metaData.fileType && React.createElement("h4", { style: { textAlign: 'center' } }, " ", "Download " + (this.props.message.metaData.name || 'file') + " " + this.props.message.metaData.fileType, " "))), readStatus));
+            var chatBubbleStyles = this.props.message.id === 0 ? Object.assign({}, styles_1.default.chatbubble, bubblesCentered ? {} : styles_1.default.chatbubbleOrientationNormal, chatbubble, userBubble, this.props.message.styles && this.props.message.styles.bubbleStyles ? this.props.message.styles.bubbleStyles : {}) : Object.assign({}, styles_1.default.chatbubble, styles_1.default.recipientChatbubble, bubblesCentered ? {} : styles_1.default.recipientChatbubbleOrientationNormal, userBubble, chatbubble, this.props.message.styles && this.props.message.styles.bubbleStyles ? this.props.message.styles.bubbleStyles : {});
+            return React.createElement("div", { style: Object.assign({}, styles_1.default.chatbubbleWrapper) }, this.props.message.type == "text" && React.createElement("div", { style: chatBubbleStyles }, React.createElement("p", { style: Object.assign({}, styles_1.default.p, text) }, parser ? parser(this.props.message.message) : this.props.message.message), readStatus), this.props.message.type === "image" && React.createElement("div", { style: chatBubbleStyles }, React.createElement("p", { style: Object.assign({}, styles_1.default.p, text) }, React.createElement("img", { src: this.props.message.message, style: { maxHeight: '100px' } })), readStatus), this.props.message.type === "file" && React.createElement("div", { style: chatBubbleStyles }, React.createElement("p", { style: Object.assign({}, styles_1.default.p, text) }, React.createElement("a", { href: this.props.message.message, download: this.props.message.metaData.name || 'ChatFile' }, this.props.message.metaData.thumbnail && React.createElement("img", { style: { maxWidth: '50px', height: 'auto' }, src: this.props.message.metaData.thumbnail }), this.props.message.metaData.fileType && React.createElement("h4", { style: { textAlign: 'center' } }, " ", "Download " + (this.props.message.metaData.name || 'file') + " " + this.props.message.metaData.fileType, " "))), readStatus));
         }
     }]);
 
@@ -527,7 +537,8 @@ var ChatFeed = function (_React$Component) {
                 isTyping = _props.isTyping,
                 bubbleStyles = _props.bubbleStyles,
                 chatBubble = _props.chatBubble,
-                showSenderName = _props.showSenderName;
+                showSenderName = _props.showSenderName,
+                parser = _props.parser;
 
             var ChatBubble = chatBubble || ChatBubble_1.default;
             var group = [];
@@ -536,7 +547,7 @@ var ChatFeed = function (_React$Component) {
                 if (!messages[index + 1] || messages[index + 1].id !== message.id) {
                     var messageGroup = group;
                     group = [];
-                    return React.createElement(BubbleGroup_1.default, { key: index, messages: messageGroup, id: message.id, showSenderName: showSenderName, chatBubble: ChatBubble, avatar: message.avatar, timestamp: message.timestamp });
+                    return React.createElement(BubbleGroup_1.default, { key: index, messages: messageGroup, id: message.id, showSenderName: showSenderName, chatBubble: ChatBubble, avatar: message.avatar, timestamp: message.timestamp, parser: parser });
                 }
                 return null;
             });
@@ -641,6 +652,7 @@ var Message = function Message(messageData) {
     this.type = messageData.type || 'text';
     this.isRead = messageData.isRead || false;
     this.metaData = messageData.metaData || {};
+    this.styles = messageData.styles || null;
 };
 
 exports.default = Message;

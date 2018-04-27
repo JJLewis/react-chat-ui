@@ -83,10 +83,13 @@ var Chat = function (_React$Component) {
         timestamp: new Date()
       }), new _lib.Message({
         id: 1,
-        message: "theres something else too..",
+        message: "This needs to be in red..",
         senderName: "George",
         avatar: _react2.default.createElement('img', { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRArL5ZYgvYomgLZ6QKxjLO6iK-w6UqdRakfN56wFzWwE7ewq0O', style: { width: "50px" } }),
-        timestamp: new Date()
+        timestamp: new Date(),
+        styles: {
+          bubbleStyles: { backgroundColor: 'red' }
+        }
       }), new _lib.Message({
         id: 1,
         message: "https://www.sample-videos.com/text/Sample-text-file-10kb.txt",
@@ -136,7 +139,8 @@ var Chat = function (_React$Component) {
         message: message,
         senderName: users[recipient],
         avatar: avatars[users[recipient]],
-        isRead: users[recipient] == 'You'
+        isRead: users[recipient] == 'You',
+        timestamp: new Date()
       });
       prevState.messages.push(newMessage);
       this.setState(this.state);
@@ -182,7 +186,10 @@ var Chat = function (_React$Component) {
           //chatBubble={this.state.useCustomBubble && customBubble}
           , { maxHeight: 'auto',
             messages: this.state.messages // Boolean: list of message objects
-            , showSenderName: true
+            , showSenderName: true,
+            parser: function parser(text) {
+              return text;
+            }
           }),
           _react2.default.createElement(
             'form',
