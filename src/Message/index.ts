@@ -5,6 +5,7 @@
 import * as React from 'react';
 
 interface MessageData {
+  uid: number;
   id: number;
   message: any;
   senderName?: string;
@@ -21,6 +22,7 @@ export default class Message {
   /**
    * Message object for organizing and storing current message data.
    */
+  uid: number;
   id: number;
   message: any;
   senderName?: string;
@@ -30,8 +32,10 @@ export default class Message {
   isRead?: boolean;
   metaData?: any;
   starred?: boolean;
+  toggleMessageStarred?: (uid:number) => void;
   styles?: any;
   constructor(messageData: MessageData) {
+    this.uid = messageData.uid; // unique message identifier
     this.id = messageData.id; // id of the sender (0 is reserved for "blue bubble")
     this.message = messageData.message;
     this.senderName = messageData.senderName || undefined;
