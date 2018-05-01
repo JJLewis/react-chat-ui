@@ -62,7 +62,7 @@ export default class ChatBubble extends React.Component {
         {
           this.props.message.toggleStarred !== null &&
           (<Star starred={this.props.message.starred} isUser={this.props.message.id == 0}
-                toggleStarred={this.props.message.toggleStarred}/>)
+                toggleStarred={this.props.message.toggleStarred} style={bubbleStyles.star}/>)
         }
         {
           this.props.message.type=="text" &&

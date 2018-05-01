@@ -1,9 +1,11 @@
-export default interface StarProps {
+export interface StarProps {
   isUser: Boolean,
   starred: Boolean,
   toggleStarred: (uid:number)=>void,
-  style: {
-    color: String,
-    size: Number,
-  }
+  style: StarStyle
+}
+
+export interface StarStyle {
+  color: String,
+  size: Number
 }

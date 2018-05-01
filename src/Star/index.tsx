@@ -1,5 +1,5 @@
 import * as React from 'react';
-import StarProps from "./interface";
+import {StarProps} from "./interface";
 
 const defaultStarStyles = {
   color: '#000000',
