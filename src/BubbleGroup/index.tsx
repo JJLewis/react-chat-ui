@@ -60,7 +60,7 @@ export default class BubbleGroup extends React.Component {
                 </small>
               </h5>
             </div>
-            <div style={{marginTop: '1em'}}>
+            <div style={{marginTop: '1.5em'}}>
               {messageNodes}
             </div>
           </div>
